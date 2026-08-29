@@ -1,0 +1,44 @@
+{
+  "heading": "Press Kit",
+  "intro": "Everything you need to write about us, in one place. If something you need isn't here, email us and you'll have it the same week.",
+  "contactName": "Press & business enquiries",
+  "contactEmail": "info@burntoutgames.com",
+  "boilerplate": "Burnt Out Games is an independent game studio founded in 2024 by a team of game design students. Its released titles are Burning Out (2025), a four-player co-op horror maze-escape, and Kawai'ian Isolation (2026), a free narrative horror game. The studio's next title is EXO, a third-person speed shooter in development for PC. The team works across genres and builds whichever idea has the most energy behind it.",
+  "boilerplateShort": "Burnt Out Games is an independent studio making fast, loud, high-energy games. Released: Burning Out and Kawai'ian Isolation. In development: EXO.",
+  "facts": [
+    {
+      "label": "Founded",
+      "value": "2024"
+    },
+    {
+      "label": "Type",
+      "value": "Independent studio"
+    },
+    {
+      "label": "Based",
+      "value": "California, United States"
+    },
+    {
+      "label": "Team",
+      "value": "10"
+    },
+    {
+      "label": "Titles released",
+      "value": "2"
+    },
+    {
+      "label": "In development",
+      "value": "EXO"
+    },
+    {
+      "label": "Engines",
+      "value": "Unreal Engine 5, Unity"
+    },
+    {
+      "label": "Press contact",
+      "value": "info@burntoutgames.com"
+    }
+  ],
+  "assets": [],
+  "usageNote": "Writing about us? Everything above is yours to quote. For logos, key art or screenshots at print resolution, email us and we'll send them over the same week."
+}

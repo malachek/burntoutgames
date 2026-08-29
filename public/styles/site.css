@@ -1,0 +1,526 @@
+/* ==========================================================================
+   Burnt Out Games — Site styles
+   Reads only from tokens.css. Do not hard-code colour or size values here.
+
+   Surfaces are three real brand colours: Ink, Firewood, Warm Peach. There is
+   no near-white page background any more.
+
+   Per-game theming: game components read --g-bg, --g-surface, --g-text,
+   --g-muted, --g-accent, --g-button, --g-on-button, --g-border, written inline
+   by the build from each game's `theme` block in content/games/*.json.
+   ========================================================================== */
+
+/* --- Reset ---------------------------------------------------------------- */
+*, *::before, *::after { box-sizing: border-box; }
+* { margin: 0; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+body {
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  color: var(--text-on-peach);
+  background: var(--bg-peach);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+img, svg, video { display: block; max-width: 100%; height: auto; }
+input, button, textarea, select { font: inherit; color: inherit; }
+
+:root {
+  --g-bg: var(--ink);
+  --g-surface: var(--ash);
+  --g-text: var(--warm-peach);
+  --g-muted: var(--peach-dim);
+  --g-accent: var(--golden-ember);
+  --g-button: var(--red-deep);
+  --g-on-button: var(--white);
+  --g-border: var(--ash-hi);
+}
+
+/* --- Skip link ------------------------------------------------------------ */
+.skip-link {
+  position: absolute; left: var(--s-4); top: var(--s-4);
+  z-index: var(--z-skip);
+  padding: var(--s-3) var(--s-5);
+  background: var(--red-deep); color: var(--white);
+  font-weight: 700; border-radius: var(--r-pill);
+  transform: translateY(-160%);
+  transition: transform var(--dur) var(--ease);
+}
+.skip-link:focus { transform: translateY(0); }
+
+/* --- Focus ---------------------------------------------------------------- */
+:focus-visible { outline: 3px solid var(--fiery-red); outline-offset: 2px; border-radius: var(--r-sm); }
+.on-ink :focus-visible, .on-firewood :focus-visible,
+.game :focus-visible, .hero :focus-visible { outline-color: var(--golden-ember); }
+
+/* --- Typography ----------------------------------------------------------- */
+h1, h2, h3, .display {
+  font-family: var(--font-display);
+  font-weight: 400;
+  line-height: var(--lh-heading);
+  letter-spacing: -0.005em;
+  text-transform: uppercase;
+  text-wrap: balance;
+}
+h1 { font-size: var(--fs-h1); }
+h2 { font-size: var(--fs-h2); }
+h3 { font-size: var(--fs-h3); letter-spacing: 0; }
+h4, h5, h6 { font-family: var(--font-body); font-weight: 700; font-size: var(--fs-body); line-height: 1.3; }
+
+p, li { text-wrap: pretty; }
+p + p { margin-top: var(--s-4); }
+
+.lead { font-size: var(--fs-lead); line-height: 1.55; }
+.small { font-size: var(--fs-small); }
+.measure { max-width: var(--measure); }
+
+.eyebrow {
+  font-family: var(--font-label); font-size: var(--fs-label); font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.16em;
+  color: var(--red-900); display: block; margin-bottom: var(--s-3);
+}
+.on-ink .eyebrow, .on-firewood .eyebrow, .game .eyebrow, .hero .eyebrow { color: var(--golden-ember); }
+.showcase .eyebrow { color: var(--g-accent); }
+
+a { color: var(--red-900); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+a:hover { color: var(--firewood); }
+.on-ink a:not(.btn), .on-firewood a:not(.btn) { color: var(--golden-ember); }
+.on-ink a:not(.btn):hover, .on-firewood a:not(.btn):hover { color: var(--light-glow); }
+
+/* --- Surfaces ------------------------------------------------------------- */
+.on-ink      { background: var(--bg-ink);      color: var(--text-on-ink); }
+.on-firewood { background: var(--bg-firewood); color: var(--text-on-firewood); }
+.on-peach    { background: var(--bg-peach);    color: var(--text-on-peach); }
+.on-ink h1, .on-ink h2, .on-ink h3,
+.on-firewood h1, .on-firewood h2, .on-firewood h3 { color: var(--light-glow); }
+
+.muted { color: var(--firewood-dim); }
+.on-ink .muted, .on-firewood .muted { color: var(--peach-dim); }
+
+/* --- Layout --------------------------------------------------------------- */
+.wrap { width: 100%; max-width: var(--max-width); margin-inline: auto; padding-inline: var(--gutter); }
+.section { padding-block: var(--section-pad); position: relative; }
+.section--tight { padding-block: clamp(2.25rem, 4.5vw, 3.75rem); }
+.section--flush { padding: 0; margin: 0; line-height: 0; }
+
+.stack > * + * { margin-top: var(--s-5); }
+.stack-sm > * + * { margin-top: var(--s-3); }
+.stack-lg > * + * { margin-top: var(--s-7); }
+
+.grid { display: grid; gap: var(--s-6); }
+.grid--2 { grid-template-columns: repeat(auto-fit, minmax(min(100%, 24rem), 1fr)); }
+.grid--3 { grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr)); }
+
+.cluster { display: flex; flex-wrap: wrap; gap: var(--s-3); align-items: center; }
+.section-head { max-width: var(--measure); margin-bottom: var(--s-6); }
+.center { text-align: center; }
+.center .section-head, .center .measure { margin-inline: auto; }
+
+.figure img { border-radius: var(--r-md); width: 100%; }
+.figure figcaption { margin-top: var(--s-3); }
+.band-photo { width: 100%; height: clamp(260px, 38vw, 560px); object-fit: cover; object-position: center 50%; }
+
+/* --- Patterns -------------------------------------------------------------
+   One fixed motif height (--pattern-motif) everywhere, so a pattern reads at
+   the same scale in a tall divider and a thin seam. Scaling the motif to the
+   strip height was the bug: short strips rendered a tiny, noisy pattern.
+
+   .band  a full-height divider between sections.
+   .seam  a thin rule of the same pattern, used to close a surface.
+   Neither ever carries text, so the vivid patterns can be fully saturated.
+   -------------------------------------------------------------------------- */
+.band, .seam {
+  background-image: var(--pattern-url);
+  background-size: auto var(--pattern-motif);
+  background-repeat: repeat-x;
+  background-position: center;
+  background-color: var(--ink);
+}
+.band { height: var(--band-h); }
+.seam { height: var(--seam-h); }
+
+/* --- Buttons --------------------------------------------------------------
+   Every hover does the same thing: the fill deepens (or the outline fills in)
+   and the label stays legible. Contrast is checked at rest AND on hover.
+   -------------------------------------------------------------------------- */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: var(--s-2);
+  min-height: 48px; padding: var(--s-3) var(--s-6);
+  font-weight: 700; font-size: var(--fs-body); line-height: 1.2;
+  text-decoration: none; text-align: center;
+  border: 2px solid transparent; border-radius: var(--r-pill);
+  cursor: pointer;
+  transition: transform var(--dur) var(--ease), background-color var(--dur) var(--ease),
+              border-color var(--dur) var(--ease), color var(--dur) var(--ease);
+}
+.btn:hover { transform: translateY(-2px); }
+.btn:active { transform: translateY(0); }
+.btn__icon { width: 1.2em; height: 1.2em; flex: 0 0 auto; }
+
+/* Solid. Hover deepens the fill: white stays at 8.4:1. */
+.btn--primary { background: var(--red-deep); color: var(--white); border-color: var(--red-deep); }
+.btn--primary:hover { background: var(--red-800); border-color: var(--red-800); color: var(--white); }
+
+/* Outline. Hover fills with its own border colour and inverts the label. */
+.btn--ghost { background: transparent; color: var(--firewood); border-color: var(--firewood); }
+.btn--ghost:hover { background: var(--firewood); color: var(--warm-peach); border-color: var(--firewood); }
+.on-ink .btn--ghost, .on-firewood .btn--ghost, .hero .btn--ghost {
+  color: var(--warm-peach); border-color: var(--warm-peach);
+}
+.on-ink .btn--ghost:hover, .on-firewood .btn--ghost:hover, .hero .btn--ghost:hover {
+  background: var(--warm-peach); color: var(--ink); border-color: var(--warm-peach);
+}
+
+/* Themed, same two behaviours in the current game's colours. */
+.btn--game { background: var(--g-button); color: var(--g-on-button); border-color: var(--g-button); }
+.btn--game:hover { background: var(--g-bg); color: var(--g-accent); border-color: var(--g-accent); }
+.btn--game-ghost { background: transparent; color: var(--g-text); border-color: var(--g-accent); }
+.btn--game-ghost:hover { background: var(--g-accent); color: var(--g-bg); border-color: var(--g-accent); }
+
+.btn--lg { min-height: 56px; padding: var(--s-4) var(--s-7); font-size: var(--fs-lead); }
+.btn--sm { min-height: 44px; padding: var(--s-2) var(--s-4); font-size: var(--fs-small); }
+
+/* --- Badges --------------------------------------------------------------- */
+.badges { display: flex; flex-wrap: wrap; gap: var(--s-2); align-items: center; }
+.badge {
+  display: inline-block;
+  font-family: var(--font-label); font-size: var(--fs-label); font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.1em;
+  padding: 0.3em 0.85em; border-radius: var(--r-pill); white-space: nowrap;
+}
+.badge--dev   { background: var(--golden-ember); color: var(--firewood); }
+.badge--out   { background: var(--warm-peach);   color: var(--firewood); }
+.badge--price { background: transparent; color: var(--g-text); border: 1px solid var(--g-accent); }
+.badge--genre { background: transparent; color: var(--g-muted); border: 1px solid var(--g-border); }
+.badges--onpeach .badge--price { color: var(--firewood); border-color: var(--red-900); }
+.badges--onpeach .badge--genre { color: var(--firewood-dim); border-color: var(--firewood-dim); }
+
+/* --- Header --------------------------------------------------------------- */
+.site-header { position: sticky; top: 0; z-index: var(--z-header); background: var(--ink); border-bottom: 1px solid var(--ash-hi); }
+.site-header__inner { display: flex; align-items: center; justify-content: space-between; gap: var(--s-5); min-height: 72px; }
+.site-header__logo { display: flex; align-items: center; flex: 0 0 auto; }
+.site-header__logo img { height: 48px; width: auto; }  /* artwork ~112px wide, above the 108px minimum */
+
+.nav { display: flex; align-items: center; gap: var(--s-2); }
+.nav a:not(.btn) {
+  display: inline-flex; align-items: center; min-height: 44px;
+  font-family: var(--font-label); font-weight: 700; font-size: var(--fs-small);
+  text-transform: uppercase; letter-spacing: 0.1em;
+  color: var(--warm-peach); text-decoration: none;
+  padding: var(--s-2) var(--s-3); border-radius: var(--r-sm);
+  transition: color var(--dur) var(--ease), background-color var(--dur) var(--ease);
+}
+.nav a:not(.btn):hover { color: var(--ink); background: var(--warm-peach); }
+.nav a[aria-current="page"] { color: var(--golden-ember); }
+
+.nav-toggle { display: none; background: none; border: 0; padding: var(--s-2); cursor: pointer; }
+.nav-toggle svg { width: 28px; height: 28px; stroke: var(--warm-peach); }
+
+@media (max-width: 860px) {
+  .nav-toggle { display: block; }
+  .nav {
+    position: absolute; top: 100%; left: 0; right: 0;
+    flex-direction: column; align-items: stretch; gap: 0;
+    background: var(--ink); border-bottom: 1px solid var(--ash-hi);
+    padding: var(--s-3) var(--gutter) var(--s-5);
+    display: none;
+  }
+  .nav[data-open="true"] { display: flex; }
+  .nav a:not(.btn) { padding: var(--s-4) var(--s-3); font-size: var(--fs-body); }
+  .nav .btn { margin-top: var(--s-3); }
+}
+
+/* --- Hero ------------------------------------------------------------------
+   A seamless scrolling band of all three games. hero-strip.jpg is generated to
+   tile horizontally (its left and right edges differ by 3/255), so the marquee
+   loops forever with no visible join.
+   -------------------------------------------------------------------------- */
+.hero {
+  position: relative; overflow: hidden; isolation: isolate;
+  background: var(--ink); color: var(--warm-peach);
+  padding-block: clamp(4rem, 11vw, 8.5rem);
+  min-height: min(74vh, 700px);
+  display: flex; align-items: center;
+}
+.hero__strip {
+  position: absolute; inset: 0; z-index: -3;
+  background-image: url('/assets/hero-strip.jpg');
+  background-repeat: repeat-x;
+  background-size: auto 100%;
+  animation: hero-scroll var(--hero-scroll) linear infinite;
+}
+@keyframes hero-scroll { from { background-position: 0 center; } to { background-position: -3000px center; } }
+
+/* Neutral darkening only. The previous orange tint over EXO's violet art is
+   exactly what this replaces. */
+.hero__veil {
+  position: absolute; inset: 0; z-index: -2;
+  background:
+    linear-gradient(100deg, rgba(12,6,3,0.93) 0%, rgba(12,6,3,0.80) 46%, rgba(12,6,3,0.46) 100%),
+    linear-gradient(to top, rgba(12,6,3,0.92) 0%, rgba(12,6,3,0) 58%);
+}
+.hero__inner { position: relative; z-index: 1; width: 100%; }
+.hero__title {
+  font-family: var(--font-display); font-size: var(--fs-display);
+  line-height: var(--lh-display); letter-spacing: -0.015em;
+  text-transform: uppercase; color: var(--light-glow);
+  margin-bottom: var(--s-5);
+}
+.hero__title .flare { color: var(--fiery-red); display: block; }
+.hero__sub { font-size: var(--fs-lead); max-width: 40ch; color: var(--warm-peach); }
+.hero__actions { margin-top: var(--s-7); }
+
+@media (prefers-reduced-motion: reduce) { .hero__strip { animation: none; } }
+
+/* --- Featured showcase ----------------------------------------------------- */
+.showcase {
+  position: relative; isolation: isolate; overflow: hidden;
+  background: var(--g-bg); color: var(--g-text);
+  padding-block: clamp(3.5rem, 8vw, 6.5rem);
+}
+.showcase__art { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: var(--g-focus, center); z-index: -2; }
+.showcase__veil {
+  position: absolute; inset: 0; z-index: -1;
+  background: linear-gradient(95deg, var(--g-bg) 0%, var(--g-bg) 40%, transparent 105%);
+}
+.showcase__inner { position: relative; display: grid; gap: var(--s-7); align-items: center; }
+@media (min-width: 900px) { .showcase__inner { grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.6fr); } }
+.showcase__copy { max-width: 44ch; }
+.showcase__title { margin: 0 0 var(--s-4); }
+.showcase__logo { width: auto; height: auto; max-width: min(300px, 60vw); max-height: clamp(78px, 12vw, 140px); object-fit: contain; object-position: left center; }
+.showcase__logo--text { font-family: var(--font-display); font-size: var(--fs-h1); color: var(--g-text); }
+.showcase__tagline { font-size: var(--fs-lead); font-weight: 700; color: var(--g-accent); margin-bottom: var(--s-4); }
+.showcase__mark { width: min(300px, 55vw); margin-inline: auto; filter: drop-shadow(0 18px 40px rgba(0,0,0,0.5)); }
+@media (max-width: 899px) { .showcase__mark { display: none; } }
+
+/* --- Game capsule ---------------------------------------------------------- */
+.gcard {
+  display: flex; flex-direction: column; overflow: hidden;
+  background: var(--g-bg); color: var(--g-text);
+  border: 1px solid var(--g-border); border-radius: var(--r-lg);
+  transition: transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+}
+.gcard:hover { transform: translateY(-3px); box-shadow: var(--shadow-card-hover); }
+.gcard__art { position: relative; display: block; aspect-ratio: 16 / 7; overflow: hidden; background: var(--g-surface); }
+.gcard__cover { width: 100%; height: 100%; object-fit: cover; object-position: var(--g-focus, center); }
+.gcard__scrim { position: absolute; inset: 0; background: linear-gradient(to top, var(--g-bg) 2%, rgba(0,0,0,0.26) 55%, rgba(0,0,0,0.04) 100%); }
+.gcard__logo {
+  position: absolute; left: var(--s-5); bottom: var(--s-5);
+  width: auto; height: auto; max-width: min(220px, 52%); max-height: 44%;
+  object-fit: contain; object-position: left bottom;
+  filter: drop-shadow(0 4px 14px rgba(0,0,0,0.55));
+}
+.gcard__logo--text { font-family: var(--font-display); font-size: var(--fs-h2); color: var(--g-text); width: auto; text-transform: uppercase; }
+.gcard__body { padding: var(--s-6); display: flex; flex-direction: column; gap: var(--s-4); flex: 1; }
+.gcard__title { font-family: var(--font-display); font-size: var(--fs-h3); text-transform: uppercase; }
+.gcard__title a { color: var(--g-text); text-decoration: none; }
+.gcard__title a:hover { color: var(--g-accent); }
+.gcard__blurb { color: var(--g-text); }
+.gcard__foot { margin-top: auto; display: flex; flex-wrap: wrap; gap: var(--s-4); align-items: center; }
+.gcard__more { color: var(--g-accent); font-weight: 700; font-size: var(--fs-small); }
+.gcard__more:hover { color: var(--g-text); }
+
+.art-plate {
+  position: relative; width: 100%; height: 100%;
+  background-color: var(--g-surface); background-image: var(--pattern-url);
+  background-size: auto var(--pattern-motif);
+  display: grid; place-items: center;
+}
+.art-plate img { width: 26%; max-width: 110px; opacity: 0.9; }
+
+/* --- Game page ------------------------------------------------------------- */
+.game { background: var(--g-bg); color: var(--g-text); }
+.game a:not(.btn) { color: var(--g-accent); }
+.game a:not(.btn):hover { color: var(--g-text); }
+.game h1, .game h2, .game h3 { color: var(--g-text); }
+
+.ghero {
+  position: relative; isolation: isolate; overflow: hidden;
+  padding-block: clamp(3rem, 7vw, 6rem);
+  min-height: min(56vh, 540px); display: flex; align-items: flex-end;
+}
+.ghero__art { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: var(--g-focus, center); z-index: -2; }
+.ghero__veil {
+  position: absolute; inset: 0; z-index: -1;
+  background:
+    linear-gradient(to top, var(--g-bg) 4%, rgba(0,0,0,0.52) 54%, rgba(0,0,0,0.16) 100%),
+    linear-gradient(95deg, rgba(0,0,0,0.5), rgba(0,0,0,0) 72%);
+}
+.ghero__inner { position: relative; width: 100%; }
+.ghero__title { margin: var(--s-5) 0 var(--s-4); }
+.ghero__logo {
+  width: auto; height: auto; max-width: min(380px, 70vw);
+  max-height: clamp(88px, 14vw, 160px); object-fit: contain; object-position: left bottom;
+  filter: drop-shadow(0 6px 20px rgba(0,0,0,0.6));
+}
+.ghero__logo--text { font-family: var(--font-display); font-size: var(--fs-h1); }
+.ghero__tagline { font-size: var(--fs-lead); font-weight: 700; color: var(--g-accent); max-width: 44ch; }
+.ghero__pitch { max-width: var(--measure); margin-top: var(--s-4); }
+
+.gbody { padding-block: var(--section-pad); }
+.game-layout { display: grid; gap: var(--s-7); grid-template-columns: 1fr; align-items: start; }
+@media (min-width: 960px) { .game-layout { grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr); gap: var(--s-8); } }
+.game-layout .prose { max-width: none; }
+
+.gpanel {
+  background: var(--g-surface); border: 1px solid var(--g-border);
+  border-radius: var(--r-md); padding: var(--s-6);
+  position: sticky; top: calc(72px + var(--s-5));
+}
+@media (max-width: 959px) { .gpanel { position: static; } }
+.gpanel__head { font-family: var(--font-display); font-size: var(--fs-h3); text-transform: uppercase; margin-bottom: var(--s-5); }
+.gpanel__links { margin-top: var(--s-6); padding-top: var(--s-5); border-top: 1px solid var(--g-border); }
+.gpanel__links h3 { font-family: var(--font-label); font-size: var(--fs-label); font-weight: 700; letter-spacing: 0.14em; color: var(--g-accent); margin-bottom: var(--s-3); }
+.gpanel__links ul, .link-list { list-style: none; padding: 0; }
+.gpanel__links li + li, .link-list li + li { margin-top: var(--s-3); }
+
+.game-facts { display: grid; gap: var(--s-4); grid-template-columns: 1fr; }
+.game-facts dt { font-family: var(--font-label); font-size: var(--fs-label); font-weight: 700; text-transform: uppercase; letter-spacing: 0.14em; color: var(--g-accent); margin-bottom: var(--s-1); }
+.game-facts dd { margin: 0; font-weight: 500; }
+
+.gshots { padding-block: 0 var(--section-pad); }
+.gshots__head { font-family: var(--font-display); font-size: var(--fs-h2); margin-bottom: var(--s-6); }
+.shot-grid { display: grid; gap: var(--s-4); grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr)); }
+.shot-grid img { border-radius: var(--r-md); width: 100%; aspect-ratio: 16/10; object-fit: cover; }
+
+/* --- Cards (devlog) -------------------------------------------------------- */
+.card {
+  display: flex; flex-direction: column; overflow: hidden;
+  background: var(--firewood); color: var(--warm-peach);
+  border-radius: var(--r-md); box-shadow: var(--shadow-card);
+  transition: transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+}
+.card:hover { transform: translateY(-2px); box-shadow: var(--shadow-card-hover); }
+.card .eyebrow { color: var(--golden-ember); }
+.card__media { aspect-ratio: 16 / 9; overflow: hidden; background: var(--ink); }
+.card__media img { width: 100%; height: 100%; object-fit: cover; }
+.card__body { padding: var(--s-5); display: flex; flex-direction: column; gap: var(--s-3); flex: 1; }
+.card__title { font-family: var(--font-display); font-size: var(--fs-h3); text-transform: uppercase; }
+.card__title a { color: var(--light-glow); text-decoration: none; }
+.card__title a:hover { color: var(--golden-ember); }
+.card__foot { margin-top: auto; padding-top: var(--s-3); }
+.card__foot a { color: var(--golden-ember); font-weight: 700; }
+
+/* --- Prose ----------------------------------------------------------------- */
+.prose { max-width: var(--measure); }
+.prose > * + * { margin-top: var(--s-4); }
+.prose h2 { font-size: var(--fs-h2); margin-top: var(--s-7); }
+.prose h3 { font-size: var(--fs-h3); margin-top: var(--s-6); }
+.prose ul, .prose ol { padding-left: var(--s-5); }
+.prose li + li { margin-top: var(--s-2); }
+.prose img { border-radius: var(--r-md); }
+.prose blockquote { border-left: 4px solid var(--fiery-red); padding-left: var(--s-5); font-size: var(--fs-lead); font-style: italic; }
+.game .prose blockquote { border-left-color: var(--g-accent); }
+.prose code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.9em; background: rgba(83,33,17,0.14); padding: 0.15em 0.4em; border-radius: var(--r-sm); }
+.on-ink .prose code, .on-firewood .prose code, .game .prose code { background: rgba(255,255,255,0.10); }
+.prose pre { background: var(--ink); color: var(--warm-peach); padding: var(--s-5); border-radius: var(--r-md); overflow-x: auto; }
+.prose pre code { background: none; padding: 0; }
+.prose hr { border: 0; border-top: 2px solid var(--peach-line); margin-block: var(--s-7); }
+
+/* --- Tables & blocks ------------------------------------------------------- */
+.fact-table { width: 100%; border-collapse: collapse; }
+.fact-table th, .fact-table td { text-align: left; padding: var(--s-3) var(--s-4); border-bottom: 1px solid var(--peach-line); vertical-align: top; }
+.on-ink .fact-table th, .on-ink .fact-table td,
+.on-firewood .fact-table th, .on-firewood .fact-table td { border-bottom-color: var(--ash-hi); }
+.fact-table th { font-family: var(--font-label); font-size: var(--fs-label); font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; white-space: nowrap; width: 1%; }
+.table-scroll { overflow-x: auto; }
+
+.copy-block { background: var(--light-glow); border: 1px solid var(--peach-line); border-radius: var(--r-md); padding: var(--s-5); }
+.on-ink .copy-block, .on-firewood .copy-block { background: var(--ash); border-color: var(--ash-hi); }
+.fact-title { font-family: var(--font-display); font-size: var(--fs-h3); text-transform: uppercase; }
+
+/* --- Contact form ---------------------------------------------------------- */
+.form { display: grid; gap: var(--s-4); max-width: 34rem; }
+.field { display: grid; gap: var(--s-2); }
+.field label { font-family: var(--font-label); font-size: var(--fs-label); font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; }
+.field input, .field textarea, .field select {
+  width: 100%; padding: var(--s-3) var(--s-4);
+  background: var(--light-glow); color: var(--firewood);
+  border: 2px solid var(--peach-line); border-radius: var(--r-sm);
+  transition: border-color var(--dur) var(--ease);
+}
+.field input:focus, .field textarea:focus, .field select:focus { border-color: var(--red-deep); }
+.field textarea { min-height: 9rem; resize: vertical; }
+.field--hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+.form__note { font-size: var(--fs-small); color: var(--firewood-dim); }
+.form__status { font-weight: 700; }
+.form__status[data-state="error"] { color: var(--red-900); }
+
+/* --- Team ------------------------------------------------------------------ */
+.team-grid { list-style: none; padding: 0; display: grid; gap: var(--s-5); grid-template-columns: repeat(auto-fit, minmax(min(100%, 9.5rem), 1fr)); }
+.person { text-align: center; }
+.person__photo {
+  width: 100%; aspect-ratio: 4 / 5; margin: 0 auto var(--s-3);
+  border-radius: var(--r-md); overflow: hidden; background: var(--ash);
+  border: 2px solid var(--peach-line);
+}
+.on-ink .person__photo, .on-firewood .person__photo { border-color: var(--ash-hi); }
+.person__photo img { width: 100%; height: 100%; object-fit: cover; }
+.person__name { font-family: var(--font-display); font-size: clamp(0.98rem, 0.92rem + 0.3vw, 1.15rem); text-transform: uppercase; line-height: 1.15; }
+.person__role { font-family: var(--font-label); font-size: var(--fs-small); font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--red-900); margin-top: var(--s-1); }
+.on-ink .person__role, .on-firewood .person__role { color: var(--golden-ember); }
+.person__bio { margin-top: var(--s-2); }
+
+/* --- Footer ---------------------------------------------------------------- */
+.site-footer { background: var(--ink); color: var(--warm-peach); padding-block: var(--s-8) var(--s-6); }
+.site-footer__grid { display: grid; gap: var(--s-7); grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr)); }
+.site-footer__logo img { width: 160px; height: auto; }
+.site-footer h2 { font-family: var(--font-label); font-size: var(--fs-label); font-weight: 700; text-transform: uppercase; letter-spacing: 0.16em; color: var(--golden-ember); margin-bottom: var(--s-3); }
+.site-footer ul { list-style: none; padding: 0; }
+.site-footer li + li { margin-top: var(--s-2); }
+.site-footer a:not(.btn) { color: var(--warm-peach); text-decoration: none; }
+.site-footer a:not(.btn):hover { color: var(--golden-ember); text-decoration: underline; }
+
+/* Three written calls to action in priority order, then everything else as
+   icons. Replaces a column of nine identical text links. */
+.follow-ctas { display: grid; gap: var(--s-3); }
+.follow-ctas .btn { width: 100%; }
+.social-icons { display: flex; flex-wrap: wrap; gap: var(--s-2); margin-top: var(--s-5); list-style: none; padding: 0; }
+.social-icons li + li { margin-top: 0; }
+.social-icons a {
+  display: grid; place-items: center; width: 44px; height: 44px;
+  border-radius: var(--r-pill); border: 1px solid var(--ash-hi);
+  color: var(--warm-peach);
+  transition: background-color var(--dur) var(--ease), color var(--dur) var(--ease), border-color var(--dur) var(--ease);
+}
+.social-icons a:hover { background: var(--warm-peach); color: var(--ink); border-color: var(--warm-peach); text-decoration: none; }
+.social-icons svg { width: 20px; height: 20px; fill: currentColor; }
+
+.site-footer__base {
+  margin-top: var(--s-7); padding-top: var(--s-5); border-top: 1px solid var(--ash-hi);
+  display: flex; flex-wrap: wrap; gap: var(--s-3) var(--s-5);
+  justify-content: space-between; align-items: baseline;
+  font-size: var(--fs-small); color: var(--peach-dim);
+}
+.site-footer__base p { margin: 0; }
+
+/* --- Utilities ------------------------------------------------------------- */
+.visually-hidden {
+  position: absolute !important; width: 1px; height: 1px;
+  padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0);
+  white-space: nowrap; border: 0;
+}
+
+/* --- Scroll reveal --------------------------------------------------------- */
+.reveal { opacity: 0; transform: translateY(12px); }
+.reveal.is-in { opacity: 1; transform: none; transition: opacity var(--dur-slow) var(--ease), transform var(--dur-slow) var(--ease); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important; animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+  .reveal { opacity: 1; transform: none; }
+  .btn:hover, .card:hover, .gcard:hover { transform: none; }
+}
+
+@media print {
+  .site-header, .site-footer, .nav-toggle, .hero__strip, .hero__veil,
+  .showcase__art, .ghero__art, .band, .seam { display: none !important; }
+  body, .game, .gcard, .showcase { background: #fff !important; color: #000 !important; }
+}

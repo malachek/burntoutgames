@@ -1,0 +1,217 @@
+# ============================================================================
+# Burnt Out Games — CMS configuration
+#
+# This file defines every field you see at burntoutgames.com/admin.
+# Add a field here and it appears in the editor; the build script reads the
+# same JSON files, so new fields need a matching change in lib/templates.mjs
+# before they show up on the site.
+#
+# BEFORE FIRST USE, change two things below:
+#   1. backend.repo   -> your GitHub username/repository
+#   2. backend.base_url -> your deployed auth worker URL
+# Both are marked with CHANGE ME.
+# ============================================================================
+
+backend:
+  name: github
+  repo: CHANGE-ME/burntoutgames        # CHANGE ME — e.g. malachek/burntoutgames
+  branch: main
+  base_url: https://CHANGE-ME.workers.dev   # CHANGE ME — your auth worker URL
+  commit_messages:
+    create: 'Add {{collection}} "{{slug}}"'
+    update: 'Update {{collection}} "{{slug}}"'
+    delete: 'Delete {{collection}} "{{slug}}"'
+    uploadMedia: 'Upload "{{path}}"'
+    deleteMedia: 'Delete "{{path}}"'
+
+# Where images you upload get stored, and how the site refers to them.
+media_folder: public/assets/uploads
+public_folder: /assets/uploads
+
+publish_mode: simple
+site_url: https://burntoutgames.com
+logo_url: /assets/logo/bog-logomark.svg
+
+collections:
+  # ------------------------------------------------------------------ Games
+  - name: games
+    label: Games
+    label_singular: Game
+    folder: content/games
+    create: true
+    extension: json
+    format: json
+    slug: '{{fields.slug}}'
+    identifier_field: title
+    summary: '{{title}} — {{status}}'
+    sortable_fields: [order, title]
+    fields:
+      - { name: title, label: Title, widget: string, hint: 'The game name exactly as it should appear.' }
+      - { name: slug, label: URL slug, widget: string, pattern: ['^[a-z0-9-]+$', 'Lowercase letters, numbers and hyphens only'], hint: 'Becomes burntoutgames.com/games/THIS/. Do not change it after launch — old links will break.' }
+      - { name: order, label: Sort order, widget: number, value_type: int, default: 1, hint: 'Lower numbers appear first.' }
+      - { name: featured, label: Feature on the homepage, widget: boolean, default: false, hint: 'Only one game should have this switched on.' }
+      - { name: status, label: Status text, widget: string, default: 'In development', hint: 'The first badge. Keep it to one or two words: "In development", "Released".' }
+      - { name: price, label: Price badge, widget: string, required: false, hint: 'Second badge. "Free", "$4.99", or leave empty for none.' }
+      - name: statusType
+        label: Badge colour
+        widget: select
+        default: dev
+        options:
+          - { label: 'In development (amber)', value: dev }
+          - { label: 'Released (dark)', value: released }
+      - { name: genre, label: Genre, widget: string, hint: 'Short. e.g. "Third-Person Speed Shooter".' }
+      - { name: tagline, label: Tagline, widget: string, hint: 'One line, loud. This is the biggest sentence on the game page.' }
+      - { name: cardBlurb, label: Card blurb, widget: text, hint: 'Two or three sentences. Used on the homepage and games list.' }
+      - { name: heroPitch, label: Hero paragraph, widget: text, hint: 'The paragraph under the tagline on the game page.' }
+      - { name: body, label: Full description, widget: markdown, hint: 'Use "## Heading" to start a new section.' }
+      - name: facts
+        label: At a glance
+        widget: list
+        label_singular: Fact
+        summary: '{{fields.label}}: {{fields.value}}'
+        fields:
+          - { name: label, label: Label, widget: string }
+          - { name: value, label: Value, widget: string }
+      - name: primaryCta
+        label: Main button
+        widget: object
+        fields:
+          - { name: label, label: Button text, widget: string, default: 'Wishlist on Steam' }
+          - { name: url, label: Button link, widget: string }
+      - name: links
+        label: Where to find it
+        widget: list
+        label_singular: Link
+        summary: '{{fields.label}}'
+        fields:
+          - { name: label, label: Label, widget: string }
+          - { name: url, label: URL, widget: string }
+      - { name: cover, label: Key art, widget: image, required: false, hint: 'Wide image, at least 1440x480. Fills the card and the page header. Leave empty for a branded placeholder.' }
+      - { name: coverFocus, label: Key art focal point, widget: string, required: false, default: 'center', hint: 'Which part of the key art stays visible when it is cropped. "center", or "center 70%" to favour the lower half.' }
+      - { name: logo, label: Game logo, widget: image, required: false, hint: 'Transparent PNG or SVG. Sits on the key art and replaces the title on the game page.' }
+      - { name: mark, label: Themed BOG flame, widget: image, required: false, hint: 'The flame mascot restyled for this game. Only shown when the game is featured on the homepage.' }
+      - { name: screenshots, label: Screenshots, widget: list, required: false, field: { name: image, label: Screenshot, widget: image } }
+      - { name: trailerUrl, label: Trailer URL, widget: string, required: false, hint: 'Not shown on the site yet — reserved for a future update.' }
+      - name: pattern
+        label: Fallback pattern
+        widget: select
+        default: flame-black
+        options: [flame-black, flame-red, flame-firewood, spark-black, spark-colorful, zigzag-black, zigzag-firewood, triangles-colorful, pixels-dark]
+        hint: 'Only used when the game has no key art.'
+      - name: theme
+        label: Game colours
+        widget: object
+        collapsed: true
+        hint: >-
+          The palette this game is painted in, taken from its own art. Every text
+          colour here must reach 4.5:1 against the background it sits on. If you
+          change these, check them at webaim.org/resources/contrastchecker.
+        fields:
+          - { name: bg, label: Background, widget: color, default: '#10012B' }
+          - { name: surface, label: Raised surface (panels), widget: color, default: '#1D0847' }
+          - { name: text, label: Body text, widget: color, default: '#DED2FF' }
+          - { name: muted, label: Muted text, widget: color, default: '#AC9AD6' }
+          - { name: accent, label: Accent (taglines, links), widget: color, default: '#C08BFF' }
+          - { name: button, label: Button fill, widget: color, default: '#6A2CC4' }
+          - { name: onButton, label: Button text, widget: color, default: '#FFFFFF' }
+          - { name: border, label: Borders, widget: color, default: '#31156B' }
+
+  # ----------------------------------------------------------------- Devlog
+  - name: posts
+    label: Devlog
+    label_singular: Post
+    folder: content/posts
+    create: true
+    extension: json
+    format: json
+    slug: '{{year}}-{{month}}-{{day}}-{{fields.slug}}'
+    identifier_field: title
+    summary: '{{date}} — {{title}}'
+    sortable_fields: [date, title]
+    fields:
+      - { name: title, label: Title, widget: string }
+      - { name: slug, label: URL slug, widget: string, pattern: ['^[a-z0-9-]+$', 'Lowercase letters, numbers and hyphens only'] }
+      - { name: date, label: Date, widget: datetime, date_format: 'YYYY-MM-DD', time_format: false, format: 'YYYY-MM-DD' }
+      - { name: author, label: Author, widget: string, default: 'Burnt Out Games' }
+      - { name: summary, label: Summary, widget: text, hint: 'One or two sentences. Shown on the devlog list and in search results.' }
+      - { name: cover, label: Header image, widget: image, required: false }
+      - { name: draft, label: Draft (hide from the site), widget: boolean, default: false }
+      - { name: body, label: Post, widget: markdown }
+
+  # ------------------------------------------------------------------- Team
+  - name: team
+    label: Team
+    label_singular: Team member
+    folder: content/team
+    create: true
+    extension: json
+    format: json
+    slug: '{{slug}}'
+    identifier_field: name
+    summary: '{{name}} — {{role}}'
+    sortable_fields: [order, name]
+    fields:
+      - { name: name, label: Name, widget: string }
+      - { name: role, label: Role, widget: string }
+      - { name: order, label: Sort order, widget: number, value_type: int, default: 10 }
+      - { name: bio, label: One-line bio, widget: text, required: false }
+      - { name: photo, label: Photo, widget: image, required: false, hint: 'Square. Leave empty for a branded placeholder.' }
+      - { name: url, label: LinkedIn or portfolio, widget: string, required: false, hint: 'Full URL. Shows a "Profile" link under their role.' }
+
+  # --------------------------------------------------------- Site-wide text
+  - name: settings
+    label: Site settings
+    files:
+      - name: site
+        label: Global text & links
+        file: content/site.json
+        fields:
+          - { name: studioName, label: Studio name, widget: string }
+          - { name: url, label: Site URL, widget: string }
+          - { name: email, label: Contact email, widget: string }
+          - { name: founded, label: Founded (year), widget: string }
+          - { name: tagline, label: Tagline, widget: string, hint: 'Short. Appears in the browser tab and the footer.' }
+          - { name: descriptor, label: Search-result description, widget: text, hint: 'The plain-English one-liner Google and link previews use.' }
+          - { name: aboutHeading, label: Studio heading, widget: string, hint: 'Shown on the homepage studio block and as the Studio page title.' }
+          - { name: teamBlurb, label: Team blurb (sits under the photos), widget: text }
+          - { name: gamesIntro, label: Games page intro, widget: text }
+          - { name: devlogHeading, label: Devlog heading, widget: string }
+          - { name: devlogIntro, label: Devlog intro, widget: text }
+          - { name: contactHeading, label: Contact heading, widget: string }
+          - { name: contactBlurb, label: Contact intro, widget: text }
+          - { name: communityCtaLabel, label: Community button label, widget: string }
+          - { name: heroLineOne, label: 'Homepage headline, line 1', widget: string, hint: 'Currently "Fuel".' }
+          - { name: heroLineTwo, label: 'Homepage headline, line 2 (red)', widget: string, hint: 'Currently "your fire." Drops to its own line.' }
+          - { name: heroSub, label: Homepage sub-paragraph, widget: text }
+          - { name: aboutShort, label: 'Homepage "about" paragraph', widget: text }
+          - { name: aboutLong, label: 'Studio page — full about', widget: markdown }
+          - { name: communityHeading, label: Community section heading, widget: string }
+          - { name: communityBlurb, label: Community section text, widget: text }
+          - { name: discordUrl, label: Discord invite URL, widget: string, required: false, hint: 'Leave empty and the community buttons fall back to the Linktree.' }
+          - { name: linktreeUrl, label: Linktree URL, widget: string }
+          - name: socials
+            label: Social links (footer)
+            widget: list
+            summary: '{{fields.label}}'
+            fields:
+              - { name: label, label: Label, widget: string }
+              - { name: url, label: URL, widget: string }
+
+      - name: press
+        label: Press block (bottom of Contact)
+        file: content/press.json
+        fields:
+          - { name: heading, label: Page heading, widget: string }
+          - { name: intro, label: Intro paragraph, widget: text }
+          - { name: contactName, label: Contact label, widget: string }
+          - { name: contactEmail, label: Contact email, widget: string }
+          - { name: boilerplate, label: Boilerplate (full), widget: text }
+          - { name: boilerplateShort, label: Boilerplate (short), widget: text }
+          - name: facts
+            label: Studio fast facts
+            widget: list
+            summary: '{{fields.label}}: {{fields.value}}'
+            fields:
+              - { name: label, label: Label, widget: string }
+              - { name: value, label: Value, widget: string }
+          - { name: usageNote, label: Usage note, widget: text }

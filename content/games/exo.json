@@ -1,0 +1,71 @@
+{
+  "title": "EXO",
+  "slug": "exo",
+  "order": 1,
+  "featured": true,
+  "status": "In development",
+  "statusType": "dev",
+  "price": "",
+  "genre": "Third-Person Speed Shooter",
+  "tagline": "Speed is your weapon. Souls are your fuel.",
+  "cardBlurb": "Harvest souls, feed your suit, and go faster than anything else on the planet. Keep the chain alive and the horizon starts bending underneath you.",
+  "heroPitch": "EXO is a third-person speed shooter where going fast is the whole point. Souls from fallen enemies feed your suit, your suit turns them into velocity, and the weapons and abilities all flow into each other. A good run feels like one long move across an entire planet.",
+  "body": "## Souls in, speed out\n\nEvery enemy you drop leaves fuel behind and your suit takes it straight to the throttle. Stay aggressive and you keep accelerating. It's a genuinely great feeling once the chain gets going.\n\n## Everything chains\n\nThree weapons and a full ability set, all built to flow into each other. Cancel a shot into a dash, land the dash into a burst, arrive at the next group already moving. Finding a new chain that works is our favourite thing about playing it.\n\n## Whole planets to cross\n\nEXO runs on spherical worlds, so the ground genuinely curves away under you and you can see your own speed in it. Every planet brings its own enemies, hazards, and reasons to keep moving.\n\n## Every run is different\n\nA spawn director watches how fast you're going and builds an encounter to match it. Drones lead their shots and telegraph where they're about to freeze the ground. Husks arc around the planet to meet you head-on. Bosses hold territory and switch up their rotation halfway through.\n\n## Built in Unreal Engine 5\n\nDirectional gravity, locomotion and the camera rig are all custom, built to hold together at the speeds this game runs at. Physics resolves before anything you can see or hear, so what looks right is what actually happened.",
+  "facts": [
+    {
+      "label": "Genre",
+      "value": "Third-person speed shooter, roguelite"
+    },
+    {
+      "label": "Players",
+      "value": "Single-player"
+    },
+    {
+      "label": "Engine",
+      "value": "Unreal Engine 5"
+    },
+    {
+      "label": "Platform",
+      "value": "PC"
+    },
+    {
+      "label": "Release",
+      "value": "To be announced"
+    }
+  ],
+  "primaryCta": {
+    "label": "Wishlist on Steam",
+    "url": "https://store.steampowered.com/app/4587490/EXO/"
+  },
+  "links": [
+    {
+      "label": "Steam",
+      "url": "https://store.steampowered.com/app/4587490/EXO/"
+    },
+    {
+      "label": "GameJolt community",
+      "url": "https://gamejolt.com/c/exo-cbwexf"
+    },
+    {
+      "label": "TapTap",
+      "url": "https://www.taptap.io/app/33999910"
+    }
+  ],
+  "cover": "/assets/games/exo-key.jpg",
+  "logo": "/assets/games/exo-logo.svg",
+  "mark": "/assets/games/exo-mark.png",
+  "screenshots": [],
+  "trailerUrl": "",
+  "theme": {
+    "bg": "#10012B",
+    "surface": "#1D0847",
+    "text": "#DED2FF",
+    "muted": "#AC9AD6",
+    "accent": "#C08BFF",
+    "button": "#6A2CC4",
+    "onButton": "#FFFFFF",
+    "border": "#31156B"
+  },
+  "pattern": "flame-red",
+  "coverFocus": "center 58%"
+}

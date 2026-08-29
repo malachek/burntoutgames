@@ -1,0 +1,69 @@
+{
+  "title": "Burning Out",
+  "slug": "burning-out",
+  "order": 3,
+  "featured": false,
+  "status": "Released",
+  "statusType": "released",
+  "price": "$4.99",
+  "genre": "Co-op Survival Horror",
+  "tagline": "Four of you. One maze. One torch.",
+  "cardBlurb": "Get in, find the way out, get everyone back. One torch between the four of you, proximity chat so you can hear each other, and a maze that would rather you didn't.",
+  "heroPitch": "You and up to three friends get dropped into a dark maze with fire and not much else. Light the way, keep talking, keep moving. It is a very loud game to be in a call for.",
+  "body": "## Your light is the clock\n\nEvery second you spend exploring is a second of torch you don't get back, which turns every fork in the maze into a group decision made at speed. Splitting up is the fastest way through and the funniest way to lose.\n\n## Proximity chat does the work\n\nVoices fall off with distance, so covering ground and staying together pull against each other the whole time. We barely had to script a scare.\n\n## Made to be played loudly\n\nFour-player online co-op built in Unity on Mirror, tuned for a group call and a lot of shouting. Our first game on Steam, and still the one people put on when friends are over.",
+  "facts": [
+    {
+      "label": "Genre",
+      "value": "Co-op survival horror"
+    },
+    {
+      "label": "Players",
+      "value": "1 to 4, online co-op"
+    },
+    {
+      "label": "Engine",
+      "value": "Unity"
+    },
+    {
+      "label": "Platform",
+      "value": "PC"
+    },
+    {
+      "label": "Released",
+      "value": "13 August 2025"
+    },
+    {
+      "label": "Price",
+      "value": "$4.99"
+    }
+  ],
+  "primaryCta": {
+    "label": "Get it on Steam",
+    "url": "https://store.steampowered.com/app/3795170/"
+  },
+  "links": [
+    {
+      "label": "Steam",
+      "url": "https://store.steampowered.com/app/3795170/"
+    }
+  ],
+  "cover": "/assets/games/burning-key.jpg",
+  "logo": "/assets/games/burning-logo.png",
+  "mark": "",
+  "screenshots": [
+    "/assets/games/burning-shot.jpg"
+  ],
+  "trailerUrl": "",
+  "theme": {
+    "bg": "#140A04",
+    "surface": "#241209",
+    "text": "#F3DCC1",
+    "muted": "#BC9976",
+    "accent": "#FFA23A",
+    "button": "#B23A0C",
+    "onButton": "#FFFFFF",
+    "border": "#3D2113"
+  },
+  "pattern": "zigzag-firewood",
+  "coverFocus": "center 62%"
+}

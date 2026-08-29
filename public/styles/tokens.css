@@ -1,0 +1,108 @@
+/* ==========================================================================
+   Burnt Out Games — Design Tokens
+   The single source of truth for colour, type, space and motion.
+   Documented in brand/BRAND-SYSTEM.md. Change values here, not in site.css.
+   ========================================================================== */
+
+:root {
+  /* --- Brand palette (from BOG-Brand-Guide.pdf) ------------------------- */
+  --fiery-red:     #E34521;
+  --firewood:      #532111;
+  --warm-peach:    #F9CA96;
+  --golden-ember:  #F59D24;
+  --burnt-orange:  #DB7727;
+  --light-glow:    #FEF5EB;
+  --white:         #FFFFFF;
+  --black:         #000000;
+
+  /* --- Derived, for screen contrast (see BRAND-SYSTEM.md §1) ------------ */
+  --red-deep:      #B53417;  /* buttons on light. white on it: 6.05:1        */
+  --red-900:       #912A12;  /* links on Warm Peach: 5.47:1                  */
+  --red-800:       #8E2A12;  /* button hover fill. white on it: 8.43:1       */
+  --red-bright:    #E8674A;  /* links + accent text on dark. on ink: 5.86:1  */
+  --ink:           #1A0D07;  /* darkest surface. Warm Peach on it: 12.60:1   */
+  --ash:           #2B1710;  /* raised dark surface                          */
+  --ash-hi:        #3A2118;  /* dark surface borders                         */
+  --peach-dim:     #D9A97C;  /* muted text on ink: 8.6:1                     */
+  --firewood-dim:  #7A4A33;  /* muted text on Warm Peach: 4.87:1             */
+  --peach-line:    #C99264;  /* borders on a Warm Peach surface              */
+
+  /* --- Surfaces ----------------------------------------------------------
+     The page alternates between three real brand colours. There is no
+     near-white page background: Light Glow is a text and accent colour now,
+     not a surface, which is what the brand guide's tier list actually says.
+     --------------------------------------------------------------------- */
+  --bg-ink:        var(--ink);
+  --bg-firewood:   var(--firewood);
+  --bg-peach:      var(--warm-peach);
+
+  --text-on-ink:      var(--warm-peach);
+  --text-on-firewood: var(--warm-peach);
+  --text-on-peach:    var(--firewood);
+
+  --accent:        var(--fiery-red);
+
+  /* --- Type -------------------------------------------------------------- */
+  /* Nexa Rust Slab is licensed. Alfa Slab One stands in. See BRAND-SYSTEM §2. */
+  --font-display: 'Alfa Slab One', 'Nexa Rust Slab', Rockwell, Georgia, serif;
+  --font-body:    'Roboto', system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
+  --font-label:   'Roboto Condensed', 'Roboto', system-ui, sans-serif;
+
+  /* Display sizes came down after review: game-page headings were enormous. */
+  --fs-display: clamp(2.5rem, 1.45rem + 5.2vw, 5rem);
+  --fs-h1:      clamp(1.95rem, 1.35rem + 3.0vw, 3.25rem);
+  --fs-h2:      clamp(1.55rem, 1.25rem + 1.5vw, 2.25rem);
+  --fs-h3:      clamp(1.2rem, 1.10rem + 0.5vw, 1.45rem);
+  --fs-lead:    clamp(1.0625rem, 1.0rem + 0.35vw, 1.25rem);
+  --fs-body:    clamp(1rem, 0.98rem + 0.10vw, 1.0625rem);
+  --fs-small:   clamp(0.875rem, 0.86rem + 0.08vw, 0.9375rem);
+  --fs-label:   clamp(0.75rem, 0.73rem + 0.10vw, 0.8125rem);
+
+  --lh-display: 0.98;
+  --lh-heading: 1.12;
+  --lh-body:    1.65;
+
+  --measure: 66ch;
+
+  /* --- Space (8px base) --------------------------------------------------- */
+  --s-1: 0.25rem;  --s-2: 0.5rem;   --s-3: 0.75rem;  --s-4: 1rem;
+  --s-5: 1.5rem;   --s-6: 2rem;     --s-7: 3rem;     --s-8: 4rem;
+  --s-9: 6rem;     --s-10: 8rem;
+
+  --gutter:      clamp(1.25rem, 5vw, 4rem);
+  --section-pad: clamp(3.5rem, 8vw, 7rem);
+  --max-width:   1240px;
+
+  /* --- Patterns -----------------------------------------------------------
+     One fixed motif height everywhere, so a pattern is the same size whether
+     it sits in a tall divider or a thin seam. Scaling the motif with the strip
+     height was the inconsistency: short bands rendered a tiny, noisy pattern.
+     --------------------------------------------------------------------- */
+  --pattern-motif: 90px;
+  --band-h:        clamp(3.25rem, 5vw, 4.5rem);
+  --seam-h:        14px;
+
+  /* --- Radius ------------------------------------------------------------- */
+  --r-sm:   4px;
+  --r-md:   12px;
+  --r-lg:   20px;
+  --r-pill: 999px;
+
+  /* --- Motion ------------------------------------------------------------- */
+  --ease:      cubic-bezier(0.2, 0, 0, 1);
+  --dur-fast:  120ms;
+  --dur:       160ms;
+  --dur-slow:  240ms;
+  --hero-scroll: 48s;
+
+  /* --- Elevation ---------------------------------------------------------- */
+  --shadow-card: 0 2px 4px rgba(10, 5, 2, 0.14), 0 12px 28px rgba(10, 5, 2, 0.18);
+  --shadow-card-hover: 0 4px 10px rgba(10, 5, 2, 0.20), 0 22px 46px rgba(10, 5, 2, 0.28);
+
+  /* --- Layers -------------------------------------------------------------- */
+  --z-pattern: 0;
+  --z-content: 1;
+  --z-header:  100;
+  --z-menu:    200;
+  --z-skip:    300;
+}
