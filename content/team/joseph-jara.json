@@ -1,8 +1,10 @@
 {
   "name": "Joseph Jara",
   "role": "Technical Sound Designer",
-  "order": 7,
+  "order": 3,
+  "bio": "",
   "photo": "/assets/team/joseph-jara.jpg",
-  "website": "",
-  "linkedin": ""
+  "url": "",
+  "linkedin": "",
+  "website": ""
 }
