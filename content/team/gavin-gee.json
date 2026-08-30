@@ -1,8 +1,10 @@
 {
   "name": "Gavin Gee",
   "role": "Technical Artist & Engineer",
-  "order": 6,
+  "order": 7,
+  "bio": "",
   "photo": "/assets/team/gavin-gee.jpg",
-  "website": "",
-  "linkedin": ""
+  "url": "",
+  "linkedin": "",
+  "website": ""
 }
