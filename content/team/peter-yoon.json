@@ -1,8 +1,10 @@
 {
   "name": "Peter Yoon",
   "role": "Game Writer & Designer",
-  "order": 10,
+  "order": 4,
+  "bio": "",
   "photo": "/assets/team/peter-yoon.jpg",
-  "website": "",
-  "linkedin": ""
+  "url": "",
+  "linkedin": "",
+  "website": ""
 }
