@@ -1,8 +1,10 @@
 {
   "name": "Ansh Minhas",
   "role": "Technical Artist",
-  "order": 4,
+  "order": 8,
+  "bio": "",
   "photo": "/assets/team/ansh-minhas.jpg",
-  "website": "",
-  "linkedin": ""
+  "url": "",
+  "linkedin": "",
+  "website": ""
 }
