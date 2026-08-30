@@ -254,15 +254,10 @@ minute. You can do this from your phone.
 Everything the CMS edits is a plain JSON file in `content/`. Change it, run
 `node build.mjs` to check it locally, then commit and push.
 
-### Reviewing all the copy at once
+### Adding a downloadable press asset
 
-Run `node copy-review.mjs`. It writes `COPY-REVIEW.md` — every editable string
-on the site in one file, each with the exact field it maps to. Read it, mark up
-what you want changed, and either edit the field yourself or send the file back.
-It regenerates from `content/`, so it can never be out of date.
-
-> **Note:** brand assets are deliberately not offered for public download.
-> Press enquiries get files by email.
+Put the file in `public/assets/press/`, then add it under Site settings → Press
+kit → Downloadable assets with the URL `/assets/press/your-file.pdf`.
 
 ---
 

@@ -126,7 +126,7 @@ a:hover { color: var(--firewood); }
    and the carpet, fill the frame. */
 .figure--crop img { aspect-ratio: 5 / 4; object-fit: cover; object-position: center 46%; }
 .figure figcaption { margin-top: var(--s-3); }
-.band-photo { width: 100%; height: clamp(260px, 38vw, 560px); object-fit: cover; object-position: center 50%; }
+.band-photo { width: 100%; height: clamp(320px, 42vw, 620px); object-fit: cover; object-position: center 44%; display: block; }
 
 /* --- Patterns -------------------------------------------------------------
    One fixed motif height (--pattern-motif) everywhere, so a pattern reads at
@@ -246,8 +246,8 @@ a:hover { color: var(--firewood); }
 .hero {
   position: relative; overflow: hidden; isolation: isolate;
   background: var(--ink); color: var(--warm-peach);
-  padding-block: clamp(4rem, 11vw, 8.5rem);
-  min-height: min(74vh, 700px);
+  padding-block: clamp(4rem, 11vw, 8.5rem) clamp(2.25rem, 5vw, 4rem);
+  min-height: min(66vh, 620px);
   display: flex; align-items: center;
 }
 .hero__strip {
@@ -276,11 +276,13 @@ a:hover { color: var(--firewood); }
 }
 
 /* The white flame, as in the first iteration. */
+/* The mark is deliberately huge and runs off the bottom-right corner. It sits
+   at z-index -1, so the headline and the buttons pass straight over it. */
 .hero__mark {
-  position: absolute; right: 4%; bottom: -6%; z-index: -1;
-  width: min(30vw, 340px); opacity: 0.13; pointer-events: none;
+  position: absolute; right: -6%; bottom: -34%; z-index: -1;
+  width: min(74vw, 900px); opacity: 0.11; pointer-events: none;
 }
-@media (max-width: 860px) { .hero__mark { right: -8%; bottom: -4%; width: 58vw; opacity: 0.10; } }
+@media (max-width: 860px) { .hero__mark { right: -22%; bottom: -20%; width: 118vw; opacity: 0.12; } }
 .hero__inner { position: relative; z-index: 1; width: 100%; }
 .hero__title {
   font-family: var(--font-display); font-size: var(--fs-display);
@@ -476,21 +478,87 @@ a:hover { color: var(--firewood); }
 .form__status[data-state="error"] { color: var(--red-900); }
 
 /* --- Team ------------------------------------------------------------------ */
-.team-grid { list-style: none; padding: 0; display: grid; gap: var(--s-6) var(--s-5); grid-template-columns: repeat(auto-fit, minmax(min(100%, 11.5rem), 1fr)); }
-.person { text-align: center; }
-.person__photo {
-  width: 100%; aspect-ratio: 4 / 5; margin: 0 auto var(--s-3);
-  border-radius: var(--r-md); overflow: hidden; background: var(--ash);
-  border: 2px solid var(--peach-line);
+.team-grid {
+  list-style: none; padding: 0; display: grid;
+  gap: var(--s-5) var(--s-4);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 11.5rem), 1fr));
 }
-.on-ink .person__photo, .on-firewood .person__photo { border-color: var(--ash-hi); }
-.person__photo img { width: 100%; height: 100%; object-fit: cover; }
-.person__name { font-family: var(--font-display); font-size: clamp(1.05rem, 0.98rem + 0.35vw, 1.3rem); text-transform: uppercase; line-height: 1.12; }
-.person__role { font-family: var(--font-label); font-size: var(--fs-small); font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--red-900); margin-top: var(--s-1); }
-.on-ink .person__role, .on-firewood .person__role { color: var(--golden-ember); }
-/* Website / LinkedIn under each person, as small labelled links. */
-.person__links { display: flex; flex-wrap: wrap; gap: var(--s-3); justify-content: center; margin-top: var(--s-2); }
-.person__links a { font-family: var(--font-label); font-size: var(--fs-label); font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; }
+
+/* --- Team card ---------------------------------------------------------------
+   Modelled on the old site's team page: the portrait fills the card, fades to
+   black at the bottom, and the name sits ON the photo, set on a slight angle.
+   Links are icon buttons bottom-left, the role reads bottom-right.
+   -------------------------------------------------------------------------- */
+.person {
+  position: relative; isolation: isolate; overflow: hidden;
+  display: flex; flex-direction: column;
+  border-radius: 18px; background: #0E0906;
+  border: 2px solid var(--golden-ember);
+  box-shadow: var(--shadow-card);
+}
+.person__photo { aspect-ratio: 4 / 5; margin: 0; }
+.person__photo img,
+.person__photo .art-plate { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+/* The falloff over the bottom of the portrait. Transparent across the face,
+   solid black by the bottom edge, so white type never sits on skin. */
+.person__fade {
+  position: absolute; left: 0; right: 0; top: 0;
+  aspect-ratio: 4 / 5; pointer-events: none;
+  background: linear-gradient(to bottom,
+    rgba(14, 9, 6, 0) 55%,
+    rgba(14, 9, 6, 0.45) 70%,
+    rgba(14, 9, 6, 0.93) 84%,
+    #0E0906 96%);
+}
+
+/* Text sits in normal flow BELOW the photo, with the name pulled up so it
+   overlaps the fade. A long role makes the card taller instead of colliding
+   with the name — which is what happened when everything was absolute. */
+.person__body {
+  position: relative; z-index: 1;
+  display: flex; flex-direction: column; gap: 0.5rem;
+  padding: 0 0.75rem 0.85rem;
+}
+.person__name {
+  margin: -2.1em 0 0; /* rides up over the photo */
+  font-family: var(--font-display);
+  font-size: clamp(1.15rem, 0.95rem + 0.85vw, 1.6rem);
+  line-height: 0.98; letter-spacing: 0.005em;
+  text-transform: uppercase; color: #fff;
+  transform: rotate(-3.4deg); transform-origin: left center;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.8);
+}
+.person__name span { display: block; }
+.person__name span + span { padding-left: 0.45em; }
+
+.person__meta {
+  display: flex; align-items: flex-end; justify-content: space-between;
+  gap: var(--s-3);
+}
+.person__links { display: flex; gap: 0.5rem; margin: 0; }
+.team-grid .person .person__links a {
+  display: grid; place-items: center; width: 1.75rem; height: 1.75rem;
+  color: #fff; border-radius: 6px;
+  transition: transform var(--dur) var(--ease), color var(--dur) var(--ease);
+}
+.team-grid .person .person__links a:hover,
+.team-grid .person .person__links a:focus-visible {
+  color: var(--golden-ember); transform: translateY(-2px);
+}
+.person__links .imark { width: 100%; height: 100%; display: block; }
+.person__links:empty { display: none; }
+
+.person__role {
+  margin: 0; text-align: right; flex: 1 1 auto;
+  font-family: var(--font-body); font-weight: 500;
+  font-size: clamp(0.78rem, 0.75rem + 0.18vw, 0.9rem);
+  line-height: 1.25; color: #fff; text-transform: none; letter-spacing: 0;
+}
+
+@media (max-width: 520px) {
+  .team-grid { grid-template-columns: repeat(2, 1fr); }
+}
 
 /* --- Footer ---------------------------------------------------------------- */
 .site-footer { background: var(--ink); color: var(--warm-peach); padding-block: var(--s-8) var(--s-6); }
@@ -554,10 +622,12 @@ a:hover { color: var(--firewood); }
 /* --- Team photo as a page header -------------------------------------------
    Caption sits BELOW the photo on a solid surface. Over the image it was
    1.4:1 against the bright part of the picture. */
-.team-hero { margin: 0; }
+.team-hero { margin: 0; background: var(--ink); }
+/* The caption gets its own quiet bar under the photo — centred, with real room
+   around it, so it reads as a credit line and not as text jammed on the edge. */
 .team-hero__cap {
-  padding-block: var(--s-4) var(--s-5);
+  padding-block: var(--s-5) var(--s-6);
   font-family: var(--font-label); font-size: var(--fs-small); font-weight: 700;
   text-transform: uppercase; letter-spacing: 0.12em;
-  color: var(--peach-dim); line-height: 1.4;
+  color: var(--peach-dim); line-height: 1.4; text-align: center;
 }

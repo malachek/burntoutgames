@@ -4,6 +4,23 @@
    Documented in brand/BRAND-SYSTEM.md. Change values here, not in site.css.
    ========================================================================== */
 
+/* --------------------------------------------------------------------------
+   Display font is served from this site, not from Google. It is the brand
+   voice on every heading, so it must not depend on a third party being
+   reachable: when fonts.googleapis.com is blocked or slow, a webfont link
+   silently falls back to Georgia and the whole page stops looking like BOG.
+   Body text still comes from Google, where the fallback (the system UI sans)
+   is close enough that a failure is invisible.
+   -------------------------------------------------------------------------- */
+@font-face {
+  font-family: 'Alfa Slab One';
+  src: url('/assets/fonts/alfa-slab-one-latin.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+2000-206F, U+2074, U+20AC, U+2122, U+2212;
+}
+
 :root {
   /* --- Brand palette (from BOG-Brand-Guide.pdf) ------------------------- */
   --fiery-red:     #E34521;
