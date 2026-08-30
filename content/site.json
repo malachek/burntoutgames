@@ -4,52 +4,49 @@
   "email": "info@burntoutgames.com",
   "founded": "2024",
   "tagline": "Fuel your fire.",
-  "descriptor": "Burnt Out Games is an independent studio making fast, loud, high-energy games.",
-  "heroLineOne": "Fuel",
-  "heroLineTwo": "your fire.",
-  "heroSub": "We make games out of whatever we can't stop thinking about. Play one and you'll feel exactly how much fun we were having.",
-  "aboutShort": "We started Burnt Out Games as game design students building project after project together, because it was the best part of the week. Two games on Steam later, with EXO on the way, that hasn't changed. Every one of them started with somebody getting excited and everybody else catching it.",
-  "aboutLong": "We started Burnt Out Games as game design students, working together on project after project because it was the best part of the week. Since then we've put two games on Steam, with EXO on the way.\n\nWe play, we study, and we make. Coming at games from all three sides at once is how we keep finding new answers to what a game can even be, and pushing on that is the entire reason we're here.\n\nEverything we've built started with one person getting excited and everyone else catching it off them. That's the fire. It's a lot more fun shared.\n\nGLFH.",
-  "communityHeading": "Come bog it up with us",
-  "communityBlurb": "Updates, playtests, and bogging it up. We're busy breaking speed itself in EXO, and the server is where you'll see it first and get your hands on it first. Bring your fire, we'll bring ours.",
-  "discordUrl": "",
+  "descriptor": "Burnt Out Games is an independent game studio. Speed shooter, to narrative adventure, to online experiences.",
+  "heroLineOne": "Fuel your",
+  "heroLineTwo": "fire.",
+  "heroSub": "We make games that are fun to make, so you'll have fun playing.",
+  "aboutShort": "We started Burnt Out Games as game design students, working together on project after project because it was the best part of the week. Since then we've put two games on Steam, with EXO (our highly anticipated third) on the way.",
+  "aboutLong": "We started Burnt Out Games as game design students, working together on project after project because it was the best part of the week. Since then we've put two games on Steam, with EXO (our highly anticipated third) on the way.\n\nWe play, we study, we make. We seek to push boundaries in gaming, always asking questions of what a game can be. Burning down those walls is the entire reason we're here.\n\nDisclaimer: We are not burnt out. We're burning bright.",
+  "communityHeading": "Let's play",
+  "communityBlurb": "Updates, playtests, and bogging it up. Bring your fire, we'll bring ours.",
+  "discordUrl": "https://discord.gg/KwQNDP6qsc",
   "linktreeUrl": "https://linktr.ee/burntoutgames",
   "socials": [
     {
-      "label": "TikTok",
-      "url": "https://www.tiktok.com/@burnt_out_games"
+      "label": "Linktree",
+      "url": "https://linktr.ee/burntoutgames"
+    },
+    {
+      "label": "Discord",
+      "url": "https://discord.gg/KwQNDP6qsc"
     },
     {
       "label": "Instagram",
       "url": "https://www.instagram.com/burntoutgames/"
     },
     {
+      "label": "TikTok",
+      "url": "https://www.tiktok.com/@burnt_out_games"
+    },
+    {
       "label": "YouTube",
       "url": "https://www.youtube.com/@BurntOutGames"
     },
     {
-      "label": "LinkedIn",
-      "url": "https://www.linkedin.com/company/burnt-out-games/"
-    },
-    {
       "label": "Steam",
       "url": "https://store.steampowered.com/curator/45644839"
-    },
-    {
-      "label": "GameJolt",
-      "url": "https://gamejolt.com/c/exo-cbwexf"
-    },
-    {
-      "label": "Linktree",
-      "url": "https://linktr.ee/burntoutgames"
     }
   ],
   "aboutHeading": "We game",
   "communityCtaLabel": "Join our Discord",
-  "teamBlurb": "Ten of us, plus the contributors who jumped on EXO. We're all game design students, and we all play the things we make.",
-  "gamesIntro": "A speed shooter, a horror story, and a maze that gives four people one torch. We build whichever idea we're most excited about, which is why no two of them look alike.",
-  "devlogHeading": "What we're working on",
-  "devlogIntro": "The parts we get excited about and can't fit into thirty seconds. Systems we're proud of, things we worked out along the way, and the occasional accident that turned into a feature.",
-  "contactHeading": "Say hi",
-  "contactBlurb": "One inbox, and we read all of it. Press, publishing, playtesting, or just to tell us what you thought."
+  "gamesIntro": "Speed shooter, to narrative adventure, to online experiences. We'll never confine to a genre, always chasing our next big idea for something fun to make (and funner to play).",
+  "devlogHeading": "Devlog",
+  "devlogIntro": "The stuff we're excited about that won't fit in a Discord message or an IG story. Systems we're proud of, things we worked out along the way, big project milestones.",
+  "contactHeading": "Hi!",
+  "contactBlurb": "Send us a message! For any inquiries in feedback, press, publishing, and playtesting.",
+  "teamPhotoCaption": "Ten of us, plus contributors on EXO.",
+  "contactEyebrow": "Say hi"
 }

@@ -78,9 +78,9 @@
      it sits in a tall divider or a thin seam. Scaling the motif with the strip
      height was the inconsistency: short bands rendered a tiny, noisy pattern.
      --------------------------------------------------------------------- */
-  --pattern-motif: 90px;
-  --band-h:        clamp(3.25rem, 5vw, 4.5rem);
-  --seam-h:        14px;
+  --pattern-motif: 210px;
+  --band-h:        clamp(4.5rem, 7vw, 6.5rem);
+  --seam-h:        22px;
 
   /* --- Radius ------------------------------------------------------------- */
   --r-sm:   4px;

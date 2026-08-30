@@ -122,6 +122,9 @@ a:hover { color: var(--firewood); }
 .center .section-head, .center .measure { margin-inline: auto; }
 
 .figure img { border-radius: var(--r-md); width: 100%; }
+/* The team shot is a wide room photo: crop in so the people, not the ceiling
+   and the carpet, fill the frame. */
+.figure--crop img { aspect-ratio: 5 / 4; object-fit: cover; object-position: center 46%; }
 .figure figcaption { margin-top: var(--s-3); }
 .band-photo { width: 100%; height: clamp(260px, 38vw, 560px); object-fit: cover; object-position: center 50%; }
 
@@ -254,16 +257,30 @@ a:hover { color: var(--firewood); }
   background-size: auto 100%;
   animation: hero-scroll var(--hero-scroll) linear infinite;
 }
-@keyframes hero-scroll { from { background-position: 0 center; } to { background-position: -3000px center; } }
+/* One cycle is 2280x1100, so a 700px-tall hero renders it 1451px wide: all
+   three games are on screen at once, and the loop is exactly one cycle. */
+@keyframes hero-scroll {
+  from { background-position: 0 center; }
+  to   { background-position: calc(-2280 / 1100 * 100vh) center; }
+}
 
 /* Neutral darkening only. The previous orange tint over EXO's violet art is
    exactly what this replaces. */
+/* Darkens only where the words are. The right two thirds stay open so the art
+   is actually legible, which the previous flat 0.8-0.9 veil killed. */
 .hero__veil {
   position: absolute; inset: 0; z-index: -2;
   background:
-    linear-gradient(100deg, rgba(12,6,3,0.93) 0%, rgba(12,6,3,0.80) 46%, rgba(12,6,3,0.46) 100%),
-    linear-gradient(to top, rgba(12,6,3,0.92) 0%, rgba(12,6,3,0) 58%);
+    linear-gradient(100deg, rgba(12,6,3,0.90) 0%, rgba(12,6,3,0.72) 34%, rgba(12,6,3,0.18) 68%, rgba(12,6,3,0.10) 100%),
+    linear-gradient(to top, rgba(12,6,3,0.55) 0%, rgba(12,6,3,0) 42%);
 }
+
+/* The white flame, as in the first iteration. */
+.hero__mark {
+  position: absolute; right: 4%; bottom: -6%; z-index: -1;
+  width: min(30vw, 340px); opacity: 0.13; pointer-events: none;
+}
+@media (max-width: 860px) { .hero__mark { right: -8%; bottom: -4%; width: 58vw; opacity: 0.10; } }
 .hero__inner { position: relative; z-index: 1; width: 100%; }
 .hero__title {
   font-family: var(--font-display); font-size: var(--fs-display);
@@ -295,7 +312,14 @@ a:hover { color: var(--firewood); }
 .showcase__logo { width: auto; height: auto; max-width: min(300px, 60vw); max-height: clamp(78px, 12vw, 140px); object-fit: contain; object-position: left center; }
 .showcase__logo--text { font-family: var(--font-display); font-size: var(--fs-h1); color: var(--g-text); }
 .showcase__tagline { font-size: var(--fs-lead); font-weight: 700; color: var(--g-accent); margin-bottom: var(--s-4); }
-.showcase__mark { width: min(300px, 55vw); margin-inline: auto; filter: drop-shadow(0 18px 40px rgba(0,0,0,0.5)); }
+/* The flame restyled for each game is iconography, not key art: it sits small
+   in a corner rather than standing in for the game's own artwork. */
+.gmark {
+  position: absolute; right: var(--s-5); top: var(--s-5); z-index: 2;
+  width: clamp(44px, 6vw, 72px); height: auto;
+  filter: drop-shadow(0 3px 10px rgba(0,0,0,0.55));
+}
+.showcase__mark { width: clamp(84px, 9vw, 132px); justify-self: end; align-self: start; filter: drop-shadow(0 8px 22px rgba(0,0,0,0.5)); }
 @media (max-width: 899px) { .showcase__mark { display: none; } }
 
 /* --- Game capsule ---------------------------------------------------------- */
@@ -452,7 +476,7 @@ a:hover { color: var(--firewood); }
 .form__status[data-state="error"] { color: var(--red-900); }
 
 /* --- Team ------------------------------------------------------------------ */
-.team-grid { list-style: none; padding: 0; display: grid; gap: var(--s-5); grid-template-columns: repeat(auto-fit, minmax(min(100%, 9.5rem), 1fr)); }
+.team-grid { list-style: none; padding: 0; display: grid; gap: var(--s-6) var(--s-5); grid-template-columns: repeat(auto-fit, minmax(min(100%, 11.5rem), 1fr)); }
 .person { text-align: center; }
 .person__photo {
   width: 100%; aspect-ratio: 4 / 5; margin: 0 auto var(--s-3);
@@ -461,10 +485,12 @@ a:hover { color: var(--firewood); }
 }
 .on-ink .person__photo, .on-firewood .person__photo { border-color: var(--ash-hi); }
 .person__photo img { width: 100%; height: 100%; object-fit: cover; }
-.person__name { font-family: var(--font-display); font-size: clamp(0.98rem, 0.92rem + 0.3vw, 1.15rem); text-transform: uppercase; line-height: 1.15; }
+.person__name { font-family: var(--font-display); font-size: clamp(1.05rem, 0.98rem + 0.35vw, 1.3rem); text-transform: uppercase; line-height: 1.12; }
 .person__role { font-family: var(--font-label); font-size: var(--fs-small); font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--red-900); margin-top: var(--s-1); }
 .on-ink .person__role, .on-firewood .person__role { color: var(--golden-ember); }
-.person__bio { margin-top: var(--s-2); }
+/* Website / LinkedIn under each person, as small labelled links. */
+.person__links { display: flex; flex-wrap: wrap; gap: var(--s-3); justify-content: center; margin-top: var(--s-2); }
+.person__links a { font-family: var(--font-label); font-size: var(--fs-label); font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; }
 
 /* --- Footer ---------------------------------------------------------------- */
 .site-footer { background: var(--ink); color: var(--warm-peach); padding-block: var(--s-8) var(--s-6); }
@@ -507,15 +533,15 @@ a:hover { color: var(--firewood); }
 }
 
 /* --- Scroll reveal --------------------------------------------------------- */
-.reveal { opacity: 0; transform: translateY(12px); }
-.reveal.is-in { opacity: 1; transform: none; transition: opacity var(--dur-slow) var(--ease), transform var(--dur-slow) var(--ease); }
+.js .reveal { opacity: 0; transform: translateY(12px); }
+.js .reveal.is-in { opacity: 1; transform: none; transition: opacity var(--dur-slow) var(--ease), transform var(--dur-slow) var(--ease); }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.001ms !important; animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
   }
-  .reveal { opacity: 1; transform: none; }
+  .js .reveal { opacity: 1; transform: none; }
   .btn:hover, .card:hover, .gcard:hover { transform: none; }
 }
 
@@ -523,4 +549,15 @@ a:hover { color: var(--firewood); }
   .site-header, .site-footer, .nav-toggle, .hero__strip, .hero__veil,
   .showcase__art, .ghero__art, .band, .seam { display: none !important; }
   body, .game, .gcard, .showcase { background: #fff !important; color: #000 !important; }
+}
+
+/* --- Team photo as a page header -------------------------------------------
+   Caption sits BELOW the photo on a solid surface. Over the image it was
+   1.4:1 against the bright part of the picture. */
+.team-hero { margin: 0; }
+.team-hero__cap {
+  padding-block: var(--s-4) var(--s-5);
+  font-family: var(--font-label); font-size: var(--fs-small); font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.12em;
+  color: var(--peach-dim); line-height: 1.4;
 }

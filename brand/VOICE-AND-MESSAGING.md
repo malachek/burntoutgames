@@ -106,7 +106,11 @@ section with three doors converts on none.
 
 **Banned words:** immersive · passionate · cutting-edge · revolutionary · journey
 · experiences (meaning games) · committed to · we strive to · seamlessly ·
-game-changing · epic · next-level · relentless · unapologetic · visceral.
+game-changing · epic · next-level · unapologetic · visceral.
+
+("Relentless" was on this list and came off it: it is Burnt Out Games' own word
+on EXO's Steam page, and the game copy is taken from those pages close to
+verbatim. Store copy the studio already wrote outranks this list.)
 
 **Sentence length varies hard.** Player-facing copy runs 4 to 10 words. Press
 copy runs 12 to 20. A paragraph of same-length sentences reads as generated.

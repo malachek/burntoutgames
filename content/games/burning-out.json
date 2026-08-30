@@ -6,15 +6,15 @@
   "status": "Released",
   "statusType": "released",
   "price": "$4.99",
-  "genre": "Co-op Survival Horror",
-  "tagline": "Four of you. One maze. One torch.",
-  "cardBlurb": "Get in, find the way out, get everyone back. One torch between the four of you, proximity chat so you can hear each other, and a maze that would rather you didn't.",
-  "heroPitch": "You and up to three friends get dropped into a dark maze with fire and not much else. Light the way, keep talking, keep moving. It is a very loud game to be in a call for.",
-  "body": "## Your light is the clock\n\nEvery second you spend exploring is a second of torch you don't get back, which turns every fork in the maze into a group decision made at speed. Splitting up is the fastest way through and the funniest way to lose.\n\n## Proximity chat does the work\n\nVoices fall off with distance, so covering ground and staying together pull against each other the whole time. We barely had to script a scare.\n\n## Made to be played loudly\n\nFour-player online co-op built in Unity on Mirror, tuned for a group call and a lot of shouting. Our first game on Steam, and still the one people put on when friends are over.",
+  "genre": "Online Co-op Horror",
+  "tagline": "Once your fire burns out, soon you will too.",
+  "cardBlurb": "In Burning Out, a multiplayer maze-escape game, you and up to 3 others are trapped in a dark maze, armed only with fire.",
+  "heroPitch": "In Burning Out, a multiplayer horror maze-escape game, you and up to 3 others are trapped in a monstrous, dark maze, armed only with fire. Light your way with your torch to unveil the maze's secrets, all while trying to keep in contact with proximity chat, but be warned, you may not be alone.",
+  "body": "## Light your way\n\nYour torch is the only thing holding back the dark, and it's always burning down. Your time is ticking: once your fire burns out, soon you will too.\n\n## Stay in contact\n\nProximity chat keeps you together right up until it doesn't. Covering ground and staying in earshot pull against each other the whole way through.\n\n## You may not be alone\n\nUnveil the maze's secrets with up to three others. Built in Unity on Mirror, and tuned for a group call.",
   "facts": [
     {
       "label": "Genre",
-      "value": "Co-op survival horror"
+      "value": "Online co-op horror, maze-escape"
     },
     {
       "label": "Players",
@@ -49,7 +49,7 @@
   ],
   "cover": "/assets/games/burning-key.jpg",
   "logo": "/assets/games/burning-logo.png",
-  "mark": "",
+  "mark": "/assets/logo/bog-logomark.svg",
   "screenshots": [
     "/assets/games/burning-shot.jpg"
   ],

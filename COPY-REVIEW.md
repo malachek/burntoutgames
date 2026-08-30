@@ -1,298 +1,333 @@
 # Copy review — every word on the site
 
-**Nothing here is live yet.** Edit this file directly (type over the text under
-each `NEW:` line), send it back, and I'll apply it. Each block says where the
-text appears and which CMS field holds it.
+Generated from `content/` by `node copy-review.mjs`. Edit the text under any
+heading and send this file back, or edit the matching field directly at
+`/admin`. The backtick line under each heading is the field it maps to.
 
 ---
 
-## What went wrong, so it doesn't happen again
+## Home
 
-I built the voice off the brand guide's description of the flame: *"been through
-the heat but refuses to burn out… grit, determination and a hint of attitude."*
-I read that as endurance and wrote a studio that survives things.
+### Hero headline, line 1
+`site.json → heroLineOne`
 
-Look at what came out: *arguments*, *defends it badly*, *shuts everyone up*,
-*permanently out of time*, *nothing has filler*, *when a mechanic stopped being
-fun it went*, *the ugly middle parts*, *come break something*, *play it before
-it's finished*, *bugs that ate a week*. Every one of those frames the work as
-something endured. Read together it's a studio that resents its own job.
+Fuel your
 
-The correction, in your words: **we burn together and fuel each other's fires.**
-Fire as warmth and light you share, not damage you survived. So three new rules
-go into the voice guide:
+### Hero headline, line 2 (red)
+`site.json → heroLineTwo`
 
-1. **Never describe the work as hard, rushed, thankless or a fight.** No
-   arguments, no running out of time, no grind, no surviving.
-2. **Never frame a decision as something killed or cut.** Talk about what's in
-   and why it's good.
-3. **Enthusiasm is the default.** If a sentence could be said by someone who is
-   tired, rewrite it as someone who can't wait to show you.
-
----
-
-# 1. Home
-
-### Hero headline
-CURRENT: Fuel / your fire.
-**NEW:** Fuel / your fire.
-*(Unchanged. `site.json` → heroLineOne / heroLineTwo)*
+fire.
 
 ### Hero sub-paragraph
-CURRENT: We make games out of whatever we can't stop thinking about. Play one and you'll feel exactly how much fun we were having.
+`site.json → heroSub`
 
-**NEW:** We make games out of whatever we can't stop thinking about. Play one and you'll feel exactly how much fun we were having.
+We make games that are fun to make, so you'll have fun playing.
 
-*(Kept. This one was already on the right side of the line.)*
+### Studio heading
+`site.json → aboutHeading`
 
-### Hero buttons
-CURRENT: `Wishlist on Steam` + `See the games`
-**NEW:** `Wishlist EXO on Steam` + `See the games`
-*(You flagged that the first button didn't name the game.)*
+We game
 
----
+### Studio paragraph
+`site.json → aboutShort`
 
-### Featured game block (EXO)
-Eyebrow: **Now in development**
-Tagline: **Speed is your weapon. Souls are your fuel.**
-
-Pitch — CURRENT: EXO is a third-person speed shooter about momentum you earn and then fight to keep. Souls from fallen enemies feed your suit. Your suit turns them into velocity. Weapons and abilities chain into each other, so a clean run reads as one long move across the surface of a planet.
-
-**NEW:** EXO is a third-person speed shooter where going fast is the whole point. Souls from fallen enemies feed your suit, your suit turns them into velocity, and the weapons and abilities all flow into each other. A good run feels like one long move across an entire planet.
-
----
-
-### Studio section
-Eyebrow: **The studio**
-
-Heading — pick one:
-- **A: We game** *(your line, and the shortest)*
-- **B: What a game can be** *(from your "what 'game' is")*
-- **C: We play, study, and make**
-
-**NEW HEADING:** We game
-
-Body — CURRENT: Most of what we make starts as an argument. Someone turns up obsessed with an idea, defends it badly, then goes away and builds a prototype that shuts everyone up. Three games in, that is still the whole process. We're ten game design students who would rather find out than plan it out, and the fun we have building shows up in how the games play.
-
-**NEW:** We started Burnt Out Games as game design students building project after project together, because it was the best part of the week. Two games on Steam later, with EXO on the way, that hasn't changed. Every one of them started with somebody getting excited and everybody else catching it.
-
-Button: `Meet the team`
-
----
-
-### Community section
-Heading — CURRENT: Play it before it's finished
-**NEW:** Come bog it up with us
-
-Body — CURRENT: We run playtests, post the ugly middle parts of development, and put your feedback in the build. Come break something and tell us how you did it.
-
-**NEW:** Updates, playtests, and bogging it up. We're busy breaking speed itself in EXO, and the server is where you'll see it first and get your hands on it first. Bring your fire, we'll bring ours.
-
-Button: `Join our Discord` *(with the Discord mark)*
-
----
-
-# 2. Games
-
-### Page intro
-CURRENT: A speed shooter set on collapsing planets. A horror story about a resort you can't leave. A maze where four friends share one torch. We chase whichever idea is burning hardest, and so far that has taken us somewhere different every time.
-
-**NEW:** A speed shooter, a horror story, and a maze that gives four people one torch. We build whichever idea we're most excited about, which is why no two of them look alike.
-
----
-
-## EXO — game page
-
-Tagline: **Speed is your weapon. Souls are your fuel.**
-
-Card blurb — CURRENT: You're the last thing moving on a dying world. Every enemy you take down charges your suit, and the suit gives it back as speed. Keep the chain going long enough and the horizon starts bending underneath you.
-
-**NEW:** Harvest souls, feed your suit, and go faster than anything else on the planet. Keep the chain alive and the horizon starts bending underneath you.
-
-Hero pitch: *(same as the homepage block above)*
-
-### Section 1
-CURRENT heading: Souls in, speed out
-CURRENT body: Every kill drops fuel and your suit drinks it. Stay aggressive and you accelerate. Stall out and you give the speed back. The whole game is a conversation between how fast you want to go and how much you're willing to risk to stay there.
-
-**NEW heading:** Souls in, speed out
-**NEW body:** Every enemy you drop leaves fuel behind and your suit takes it straight to the throttle. Stay aggressive and you keep accelerating. It's a genuinely great feeling once the chain gets going.
-
-### Section 2
-CURRENT heading: Everything chains
-CURRENT body: Three weapons and a full ability set, all built to flow into one another. Cancel a shot into a dash. Land the dash into a burst that carries you into the next group. The ceiling on a good run is however creative you're willing to get with the order you press things in.
-
-**NEW heading:** Everything chains
-**NEW body:** Three weapons and a full ability set, all built to flow into each other. Cancel a shot into a dash, land the dash into a burst, arrive at the next group already moving. Finding a new chain that works is our favourite thing about playing it.
-
-### Section 3
-CURRENT heading: Whole planets to cross
-CURRENT body: EXO takes place on spherical worlds, so there's nothing boxing you in and no skybox faking the distance. You can watch your speed compound in the curve of the ground ahead. Each planet brings its own enemies, hazards and reasons to keep moving.
-
-**NEW heading:** Whole planets to cross
-**NEW body:** EXO runs on spherical worlds, so the ground genuinely curves away under you and you can see your own speed in it. Every planet brings its own enemies, hazards, and reasons to keep moving.
-
-### Section 4
-CURRENT heading: A run that never repeats
-CURRENT body: A spawn director reads how fast you're going and feeds you an encounter to match. Push harder and the game pushes back. Drones lead their shots and telegraph where they're about to freeze the ground. Husks arc around the planet to meet you head-on. Bosses hold territory and change their rotation halfway through the fight.
-
-**NEW heading:** Every run is different
-**NEW body:** A spawn director watches how fast you're going and builds an encounter to match it. Drones lead their shots and telegraph where they're about to freeze the ground. Husks arc around the planet to meet you head-on. Bosses hold territory and switch up their rotation halfway through.
-
-### Section 5
-CURRENT heading: Built in Unreal Engine 5
-CURRENT body: We rebuilt directional gravity, locomotion and the camera rig from scratch to hold together at the speeds this game runs at. Physics resolves before anything you can see or hear, so what looks right is what actually happened.
-
-**NEW heading:** Built in Unreal Engine 5
-**NEW body:** Directional gravity, locomotion and the camera rig are all custom, built to hold together at the speeds this game runs at. Physics resolves before anything you can see or hear, so what looks right is what actually happened.
-
----
-
-## Kawai'ian Isolation — game page
-
-Tagline: **Welcome to Paradise. Enjoy your stay.**
-
-Card blurb — CURRENT: You won the pageant, and the prize was a one-way ticket off the island. Explore the resort, sit with what you remember of home, and work out what Paradise actually wants from you.
-
-**NEW:** You won the pageant and the prize was a ticket to Paradise. Explore the resort, revisit what you remember of home, and work out what this place actually wants from you.
-
-Hero pitch — CURRENT: Play as Mayumi, winner of Kawai'i's beauty pageant, holding a ticket to a resort that was supposed to be the best thing that ever happened to her. Move quietly, look closely, and let the place tell you what it is.
-
-**NEW:** Play as Mayumi, winner of Kawai'i's beauty pageant, holding a ticket to the best thing that has ever happened to her. Move quietly, look closely, and let Paradise show you what it really is.
-
-### Section 1
-Heading: **A resort that remembers for you**
-CURRENT: Paradise is spotless, warm and endlessly accommodating. The halls reward patience. Between them sit your memories of Kawai'i, rendered exactly the way you'd like to remember them, which is the first thing worth being suspicious about.
-**NEW:** Paradise is spotless, warm and endlessly accommodating. The halls reward patience. Between them sit your memories of home, rendered exactly the way you'd like to remember them, which is the first clue worth picking up.
-
-### Section 2
-Heading: **Choices the game keeps**
-CURRENT: Dialogue runs on a system that carries your earlier choices and the current state of the world forward together. What Mayumi is willing to say late in the game depends on what she was willing to believe early. Two playthroughs genuinely diverge.
-**NEW:** Dialogue runs on a system that carries your earlier choices and the state of the world forward together, so what Mayumi is willing to say later depends on what she believed earlier. Two playthroughs really do diverge.
-
-### Section 3
-Heading: **A whole game, for free**
-CURRENT: Kawai'ian Isolation released on Steam in April 2026 at no cost, with full audio, voice and an original score. Over thirty people worked on it. It is complete and it stays free.
-**NEW:** Kawai'ian Isolation released on Steam in April 2026 with full voice acting and an original score. Over thirty people worked on it. It's free, and it's staying free.
-
----
-
-## Burning Out — game page
-
-Tagline: **Four of you. One maze. One torch.**
-
-Card blurb — CURRENT: Get in, find the way out, get everyone back. Your torch is the only light you have and it is always burning down. Proximity chat means you can hear each other right up until you can't.
-**NEW:** Get in, find the way out, get everyone back. One torch between the four of you, proximity chat so you can hear each other, and a maze that would rather you didn't.
-
-Hero pitch — CURRENT: You and up to three friends are dropped into a dark maze with fire and not much else. Light the way, keep talking, and move. The torch is a clock, and when it runs out you won't be far behind.
-**NEW:** You and up to three friends get dropped into a dark maze with fire and not much else. Light the way, keep talking, keep moving. It is a very loud game to be in a call for.
-
-### Section 1
-Heading: **Your light is the clock**
-CURRENT: Every second you spend exploring is a second of torch you don't get back. That turns every fork in the maze into an argument with three other people, and it makes splitting up both the fastest idea and the worst one.
-**NEW:** Every second you spend exploring is a second of torch you don't get back, which turns every fork in the maze into a group decision made at speed. Splitting up is the fastest way through and the funniest way to lose.
-
-### Section 2
-Heading: **Proximity chat does the work**
-CURRENT: Voices fall off with distance. Cover more ground and you lose track of each other. Stay tight and you're slow. We didn't have to script a single scare into that.
-**NEW:** Voices fall off with distance, so covering ground and staying together pull against each other the whole time. We barely had to script a scare.
-
-### Section 3
-Heading: **Made to be played loudly**
-CURRENT: Four-player online co-op built in Unity on Mirror, tuned for a group call and a lot of shouting. Our first title on Steam, and still the one people put on when they've got friends over.
-**NEW:** Four-player online co-op built in Unity on Mirror, tuned for a group call and a lot of shouting. Our first game on Steam, and still the one people put on when friends are over.
-
----
-
-# 3. Studio
-
-### Page heading
-CURRENT: Who we are
-**NEW:** GLFH
-
-*(Your idea. It sets the tone in four letters and anyone who games gets it. If
-you'd rather it were plainer, alternatives: "We game" / "Who we are".)*
-
-### Body
-CURRENT (4 paragraphs about arguments, being out of time, having no resources, and cutting things)
-
-**NEW:**
-
-> We started Burnt Out Games as game design students, working together on project
-> after project because it was the best part of the week. Since then we've put two
-> games on Steam, with EXO on the way.
->
-> We play, we study, and we make. Coming at games from all three sides at once is
-> how we keep finding new answers to what a game can even be, and pushing on that
-> is the entire reason we're here.
->
-> Everything we've built started with one person getting excited and everyone else
-> catching it off them. That's the fire. It's a lot more fun shared.
-
-*(`site.json` → aboutLong)*
-
-### Team section
-Heading: **The team**
-Blurb: *(moves BELOW the photos, per your note)*
-**NEW:** Ten of us, plus the contributors who jumped on EXO. We're all game design students, and we all play the things we make.
+We started Burnt Out Games as game design students, working together on project after project because it was the best part of the week. Since then we've put two games on Steam, with EXO (our highly anticipated third) on the way.
 
 ### Team photo caption
-**NEW:** The Burnt Out Games team and EXO contributors.
+`site.json → teamPhotoCaption`
+
+Ten of us, plus contributors on EXO.
+
 
 ---
 
-# 4. Devlog
-
-### Page heading
-CURRENT: The long version
-**NEW:** What we're working on
-
-### Page intro
-CURRENT: Development that doesn't fit in a thirty-second vertical. Bugs that ate a week, systems we built twice, and the things we tried that turned out badly.
-
-**NEW:** The parts we get excited about and can't fit into thirty seconds. Systems we're proud of, things we worked out along the way, and the occasional accident that turned into a feature.
-
-### First post — "New site, same fire"
-The current post has the same problem (it calls the old site's job "existing",
-and describes the devlog as bugs and things that went wrong). I'll rewrite it
-once the rest is settled, unless you'd rather write this one yourself.
-
----
-
-# 5. Contact
+## Community block (appears on most pages)
 
 ### Heading
-CURRENT: Contact / Get in touch
-**NEW:** Say hi
+`site.json → communityHeading`
+
+Let's play
+
+### Text
+`site.json → communityBlurb`
+
+Updates, playtests, and bogging it up. Bring your fire, we'll bring ours.
+
+### Button
+`site.json → communityCtaLabel`
+
+Join our Discord
+
+
+---
+
+## Games index
+
+### Intro
+`site.json → gamesIntro`
+
+Speed shooter, to narrative adventure, to online experiences. We'll never confine to a genre, always chasing our next big idea for something fun to make (and funner to play).
+
+
+---
+
+## EXO
+
+### Genre badge
+`games/exo.json → genre`
+
+Third-Person Speed Action Shooter
+
+### Tagline
+`games/exo.json → tagline`
+
+Speed is your weapon. Souls are your fuel.
+
+### Card blurb
+`games/exo.json → cardBlurb`
+
+Harvest souls from fallen enemies to fuel your EXO suit and reach impossible speeds.
+
+### Hero paragraph
+`games/exo.json → heroPitch`
+
+Harvest the souls of fallen enemies to power your EXO suit, pushing your movement beyond human limits. Maintain your momentum, and chain together abilities to tear through your enemies as you race across shattered worlds in this relentless third person, action shooter.
+
+### Full description
+`games/exo.json → body`
+
+## Build momentum
+
+Every enemy you defeat fuels your speed.
+
+## High speed combat
+
+Blend gunplay and abilities together into flashy combos.
+
+## Race across broken worlds
+
+Navigate different planets with challenging enemies and obstacles.
+
+## Built in Unreal Engine 5
+
+Directional gravity, locomotion and the camera rig are all custom, built to hold together at the speeds this game runs at. Physics resolves before anything you can see or hear, so what looks right is what actually happened.
+
+**At a glance:** Genre: Third-person speed action shooter, roguelike · Players: Single-player · Engine: Unreal Engine 5 · Platform: PC · Release: To be announced
+
+**Button:** Wishlist on Steam → https://store.steampowered.com/app/4587490/EXO/
+
+**Where to find it:** Steam, TapTap
+
+---
+
+## Kawai'ian Isolation
+
+### Genre badge
+`games/kawaiian-isolation.json → genre`
+
+Narrative Adventure
+
+### Tagline
+`games/kawaiian-isolation.json → tagline`
+
+It's all so perfect!
+
+### Card blurb
+`games/kawaiian-isolation.json → cardBlurb`
+
+Welcome to Paradise, home to the winners of Kawai'i's Beauty Pageant! Play as Mayumi, the winner, armed with your one way ticket to the resort.
+
+### Hero paragraph
+`games/kawaiian-isolation.json → heroPitch`
+
+Welcome to Paradise, home to the winners of Kawai'i's Beauty Pageant! Play as Mayumi, the winner, armed with your one way ticket to the resort. Sneak around the puzzling halls of Paradise and explore your cherished memories of Kawai'i in all its beauty. It's all so perfect!
+
+### Full description
+`games/kawaiian-isolation.json → body`
+
+## Narrative "walking simulator" adventure
+
+- Explore beautiful 3D environments
+- Learn about Kawai'i's characters
+
+## Survival horror
+
+- Sneak around Paradise, avoiding getting caught
+- Navigate the darkness with nothing but your lighter
+- Solve puzzles and discover Paradise's truth
+
+## This game is not meant for children
+
+Mature content: gore, body horror, explicit language. Player discretion advised.
+
+**At a glance:** Genre: Narrative adventure, survival horror · Players: Single-player · Engine: Unreal Engine 5 · Platform: PC · Released: 25 April 2026 · Price: Free
+
+**Button:** Play free on Steam → https://store.steampowered.com/app/3812810/
+
+**Where to find it:** Steam
+
+---
+
+## Burning Out
+
+### Genre badge
+`games/burning-out.json → genre`
+
+Online Co-op Horror
+
+### Tagline
+`games/burning-out.json → tagline`
+
+Once your fire burns out, soon you will too.
+
+### Card blurb
+`games/burning-out.json → cardBlurb`
+
+In Burning Out, a multiplayer maze-escape game, you and up to 3 others are trapped in a dark maze, armed only with fire.
+
+### Hero paragraph
+`games/burning-out.json → heroPitch`
+
+In Burning Out, a multiplayer horror maze-escape game, you and up to 3 others are trapped in a monstrous, dark maze, armed only with fire. Light your way with your torch to unveil the maze's secrets, all while trying to keep in contact with proximity chat, but be warned, you may not be alone.
+
+### Full description
+`games/burning-out.json → body`
+
+## Light your way
+
+Your torch is the only thing holding back the dark, and it's always burning down. Your time is ticking: once your fire burns out, soon you will too.
+
+## Stay in contact
+
+Proximity chat keeps you together right up until it doesn't. Covering ground and staying in earshot pull against each other the whole way through.
+
+## You may not be alone
+
+Unveil the maze's secrets with up to three others. Built in Unity on Mirror, and tuned for a group call.
+
+**At a glance:** Genre: Online co-op horror, maze-escape · Players: 1 to 4, online co-op · Engine: Unity · Platform: PC · Released: 13 August 2025 · Price: $4.99
+
+**Button:** Get it on Steam → https://store.steampowered.com/app/3795170/
+
+**Where to find it:** Steam
+
+---
+
+## Studio
+
+### Heading
+`site.json → aboutHeading`
+
+We game
 
 ### Body
-CURRENT: One inbox and we actually read it. Press, publishing, partnerships, or a bug that's ruining your day.
-**NEW:** One inbox, and we read all of it. Press, publishing, playtesting, or just to tell us what you thought.
+`site.json → aboutLong`
+
+We started Burnt Out Games as game design students, working together on project after project because it was the best part of the week. Since then we've put two games on Steam, with EXO (our highly anticipated third) on the way.
+
+We play, we study, we make. We seek to push boundaries in gaming, always asking questions of what a game can be. Burning down those walls is the entire reason we're here.
+
+Disclaimer: We are not burnt out. We're burning bright.
+
+### The team
+`content/team/*.json`
+
+- **Conner Wood** — President & 3D Artist
+- **Malachy Kennedy** — Game Engineer
+- **Alex Madas** — Technical Game Designer
+- **Ansh Minhas** — Technical Artist
+- **Brandon Retana** — Gameplay & Tools Engineer
+- **Gavin Gee** — Technical Artist & Engineer
+- **Joseph Jara** — Technical Sound Designer
+- **Karina Chen** — UI/UX Designer
+- **Lyndsey Narvaez** — Creative Content Artist
+- **Peter Yoon** — Game Writer & Designer
 
 ---
 
-# 6. Footer
+## Devlog
 
-Priority order you gave: **Wishlist EXO > Instagram > Linktree.**
+### Heading
+`site.json → devlogHeading`
 
-**NEW:** three written buttons in that order, then a single row of icons for
-everything else (TikTok, YouTube, Discord, Steam, GameJolt, LinkedIn). Replaces
-the current column of nine text links.
+Devlog
 
-Copyright: `© 2026 Burnt Out Games, LLC. All rights reserved.`
-*(Email and copyright will be aligned on the same baseline — that was a bug.)*
+### Intro
+`site.json → devlogIntro`
+
+The stuff we're excited about that won't fit in a Discord message or an IG story. Systems we're proud of, things we worked out along the way, big project milestones.
+
+### Post: New website!
+`posts/new-site-same-fire.json`
+
+**Summary:** We built burntoutgames.com properly this time, here's about it.
+
+As we've had more time over the summer between project stages, we came back to the website. And this time, it lives on our own domain and we can update it much more easily.
+
+## Dev... blog?
+
+We'll use this for the stuff we're excited about that won't fit in a standard Discord message or IG Story post. Systems we're proud of, things we worked out along the way, big project milestones.
+
+If you want the fast version, check out our [TikTok](https://www.tiktok.com/@burnt_out_games) and [Instagram](https://www.instagram.com/burntoutgames/). If you want to play EXO before it's done, [wishlist it on Steam](https://store.steampowered.com/app/4587490/EXO/), [join our Discord](https://discord.gg/KwQNDP6qsc), and keep an eye out for a playtest.
+
+GLFH
 
 ---
 
-# Words to keep using
+## Contact
 
-From your own notes and the Discord server bio, these are the phrases that
-already sound like you. Reuse them rather than inventing new ones:
+### Eyebrow
+`site.json → contactEyebrow`
 
-- Fuel your fire
-- We game / we are the players
-- bogging it up
-- breaking speed itself
-- GLFH, GG
-- we play, study, and make
-- what a game can be
+Say hi
+
+### Heading
+`site.json → contactHeading`
+
+Hi!
+
+### Intro
+`site.json → contactBlurb`
+
+Send us a message! For any inquiries in feedback, press, publishing, and playtesting.
+
+
+---
+
+## For press & publishers (bottom of Contact)
+
+### Boilerplate
+`press.json → boilerplate`
+
+Burnt Out Games, LLC is an independent game studio founded in 2024 by a team of 8 game design students, grown now to 10 developers with several contract contributors across the studio's titles. Its released titles are Burning Out (2025), an online co-op horror maze-escape, and Kawai'ian Isolation (2026), a narrative adventure game. The studio's next title is EXO, a third-person speed action shooter, in development for PC. The team works across genres, following the fun.
+
+### Short boilerplate
+`press.json → boilerplateShort`
+
+Burnt Out Games, LLC is an independent game studio working across genres. Released: Burning Out and Kawai'ian Isolation. In development: EXO.
+
+**Fast facts:** Founded: 2024, by 8 game design students · Type: Independent studio · Based: California, United States · Team: 10, plus contract contributors · Titles released: 2 · In development: EXO · Engines: Unreal Engine 5, Unity 6 · Press contact: info@burntoutgames.com
+
+### Usage note
+`press.json → usageNote`
+
+Writing about us? Everything above is yours to quote. For logos, key art or screenshots at print resolution, email us and we'll send them over the same week.
+
+
+---
+
+## Global
+
+### Tagline (footer, browser tab)
+`site.json → tagline`
+
+Fuel your fire.
+
+### Search-result description
+`site.json → descriptor`
+
+Burnt Out Games is an independent game studio. Speed shooter, to narrative adventure, to online experiences.
+
+**Email:** info@burntoutgames.com
+
+**Links, in order:** Linktree · Discord · Instagram · TikTok · YouTube · Steam · Email
