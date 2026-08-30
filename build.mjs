@@ -232,7 +232,7 @@ async function build() {
   await writeFile(path.join(DIST, 'devlog', 'rss.xml'), rss(site, posts), 'utf8');
   await writeFile(
     path.join(DIST, 'robots.txt'),
-    `User-agent: *\nAllow: /\n\nSitemap: ${site.url.replace(/\/$/, '')}/sitemap.xml\n`,
+    `User-agent: *\nAllow: /\nDisallow: /admin/\n\nSitemap: ${site.url.replace(/\/$/, '')}/sitemap.xml\n`,
     'utf8'
   );
   await writeFile(path.join(DIST, '_headers'), HEADERS, 'utf8');

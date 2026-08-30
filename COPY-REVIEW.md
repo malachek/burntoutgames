@@ -233,7 +233,7 @@ Disclaimer: We are not burnt out. We're burning bright.
 `content/team/*.json`
 
 - **Conner Wood** — President & 3D Artist
-- **Malachy Kennedy** — Game Engineer
+- **Malachy Kennedy** — Game Engineer · Portfolio: https://malachek.com/
 - **Alex Madas** — Technical Game Designer
 - **Ansh Minhas** — Technical Artist
 - **Brandon Retana** — Gameplay & Tools Engineer
