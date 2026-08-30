@@ -13,6 +13,7 @@ import { readFile, readdir, mkdir, writeFile, copyFile, rm, stat } from 'node:fs
 import { existsSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { createHash } from 'node:crypto';
 
 import {
   homePage, gamesIndexPage, gamePage, studioPage,
@@ -183,9 +184,37 @@ async function build() {
     log('functions/ present — Cloudflare will build /api/contact from it');
   }
 
+  // ---- Cache busting -----------------------------------------------------
+  // Every deploy writes the same /styles/site.css path. With a long
+  // Cache-Control that means the CDN keeps serving the PREVIOUS deploy's file
+  // until the TTL expires — the page updates, the stylesheet does not, and the
+  // site renders with old CSS. Hashing the filename makes each build a new URL,
+  // so "immutable" is finally true and a deploy is picked up immediately.
+  const fingerprint = async (rel) => {
+    const abs = path.join(DIST, rel);
+    if (!existsSync(abs)) return null;
+    const buf = await readFile(abs);
+    const hash = createHash('sha256').update(buf).digest('hex').slice(0, 10);
+    const ext = path.extname(rel);
+    const hashed = rel.slice(0, -ext.length) + '.' + hash + ext;
+    await writeFile(path.join(DIST, hashed), buf);
+    return ['/' + rel, '/' + hashed];
+  };
+
+  const assetMap = (
+    await Promise.all(['styles/tokens.css', 'styles/site.css', 'scripts/site.js'].map(fingerprint))
+  ).filter(Boolean);
+  for (const [from, to] of assetMap) log(`hashed ${from} -> ${to}`);
+
+  const bust = (html) => {
+    let out = html;
+    for (const [from, to] of assetMap) out = out.split(from + '"').join(to + '"');
+    return out;
+  };
+
   const routes = [];
   const emit = async (route, html) => {
-    await writePage(route, html);
+    await writePage(route, bust(html));
     routes.push(route);
   };
 
@@ -228,15 +257,19 @@ const HEADERS = `/*
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: geolocation=(), microphone=(), camera=()
-
-/assets/*
-  Cache-Control: public, max-age=31536000, immutable
+  Cache-Control: public, max-age=0, must-revalidate
 
 /styles/*
-  Cache-Control: public, max-age=604800
+  Cache-Control: public, max-age=31536000, immutable
 
 /scripts/*
-  Cache-Control: public, max-age=604800
+  Cache-Control: public, max-age=31536000, immutable
+
+/assets/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/assets/*
+  Cache-Control: public, max-age=86400
 `;
 
 build().catch((err) => {
