@@ -1,8 +1,10 @@
 {
   "name": "Lyndsey Narvaez",
   "role": "Creative Content Artist",
-  "order": 9,
+  "order": 5,
+  "bio": "",
   "photo": "/assets/team/lyndsey-narvaez.jpg",
-  "website": "",
-  "linkedin": ""
+  "url": "",
+  "linkedin": "",
+  "website": ""
 }
