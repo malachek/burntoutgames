@@ -14,7 +14,7 @@
 
 backend:
   name: github
-  repo: CHANGE-ME/burntoutgames        # CHANGE ME — e.g. malachek/burntoutgames
+  repo: malachek/burntoutgames        # CHANGE ME — e.g. malachek/burntoutgames
   branch: main
   base_url: https://sveltia-cms-auth.divine-disk-74d0.workers.dev   # CHANGE ME — your auth worker URL
   commit_messages:
