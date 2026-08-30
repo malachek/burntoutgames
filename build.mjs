@@ -221,7 +221,7 @@ async function build() {
   await emit("/", homePage({ site, games, team }));
   await emit('/games/', gamesIndexPage({ site, games }));
   for (const game of games) await emit(`/games/${game.slug}/`, gamePage({ site, game }));
-  await emit('/studio/', studioPage({ site, team, games }));
+  await emit('/team/', studioPage({ site, team, games }));
   await emit('/devlog/', devlogIndexPage({ site, posts }));
   for (const post of posts) await emit(`/devlog/${post.slug}/`, postPage({ site, post }));
   await emit('/contact/', contactPage({ site, press }));

@@ -75,7 +75,7 @@ md += `## Studio
 ${block('Heading', 'site.json → aboutHeading', site.aboutHeading)}${block('Body', 'site.json → aboutLong', site.aboutLong)}### The team
 \`content/team/*.json\`
 
-${team.map((p) => `- **${p.name}** — ${p.role}${p.website ? ` · Website: ${p.website}` : ''}${p.linkedin ? ` · LinkedIn: ${p.linkedin}` : ''}`).join('\n')}
+${team.map((p) => `- **${p.name}** — ${p.role}${p.portfolio ? ` · Portfolio: ${p.portfolio}` : ''}${p.linkedin ? ` · LinkedIn: ${p.linkedin}` : ''}`).join('\n')}
 
 ---
 

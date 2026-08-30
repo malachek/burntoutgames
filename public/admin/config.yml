@@ -156,7 +156,8 @@ collections:
       - { name: order, label: Sort order, widget: number, value_type: int, default: 10 }
       - { name: bio, label: One-line bio, widget: text, required: false }
       - { name: photo, label: Photo, widget: image, required: false, hint: 'Square. Leave empty for a branded placeholder.' }
-      - { name: url, label: LinkedIn or portfolio, widget: string, required: false, hint: 'Full URL. Shows a "Profile" link under their role.' }
+      - { name: portfolio, label: Portfolio / personal site, widget: string, required: false, hint: 'Full URL. Shows a globe icon on their card. Leave empty to hide it.' }
+      - { name: linkedin, label: LinkedIn, widget: string, required: false, hint: 'Full URL. Shows the LinkedIn icon on their card. A dev can have both this and a portfolio.' }
 
   # --------------------------------------------------------- Site-wide text
   - name: settings

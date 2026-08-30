@@ -561,37 +561,63 @@ a:hover { color: var(--firewood); }
 }
 
 /* --- Footer ---------------------------------------------------------------- */
-.site-footer { background: var(--ink); color: var(--warm-peach); padding-block: var(--s-8) var(--s-6); }
-.site-footer__grid { display: grid; gap: var(--s-7); grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr)); }
-.site-footer__logo img { width: 160px; height: auto; }
-.site-footer h2 { font-family: var(--font-label); font-size: var(--fs-label); font-weight: 700; text-transform: uppercase; letter-spacing: 0.16em; color: var(--golden-ember); margin-bottom: var(--s-3); }
-.site-footer ul { list-style: none; padding: 0; }
-.site-footer li + li { margin-top: var(--s-2); }
-.site-footer a:not(.btn) { color: var(--warm-peach); text-decoration: none; }
-.site-footer a:not(.btn):hover { color: var(--golden-ember); text-decoration: underline; }
+/* --- Footer -----------------------------------------------------------------
+   One type size for every link, one colour, one accent (the small gold column
+   headings), and a single call to action. The previous version stacked three
+   full-width buttons and mixed four text sizes, which read as noise at tablet
+   width and worse on a phone.
+   -------------------------------------------------------------------------- */
+.site-footer { background: var(--ink); color: var(--peach-dim); padding-block: var(--s-8) var(--s-6); }
 
-/* Three written calls to action in priority order, then everything else as
-   icons. Replaces a column of nine identical text links. */
-.follow-ctas { display: grid; gap: var(--s-3); }
-.follow-ctas .btn { width: 100%; }
-.social-icons { display: flex; flex-wrap: wrap; gap: var(--s-2); margin-top: var(--s-5); list-style: none; padding: 0; }
-.social-icons li + li { margin-top: 0; }
-.social-icons a {
-  display: grid; place-items: center; width: 44px; height: 44px;
-  border-radius: var(--r-pill); border: 1px solid var(--ash-hi);
-  color: var(--warm-peach);
-  transition: background-color var(--dur) var(--ease), color var(--dur) var(--ease), border-color var(--dur) var(--ease);
+.site-footer__grid {
+  display: grid; gap: var(--s-7) var(--s-6);
+  grid-template-columns: 1.4fr 1fr 1fr 1fr;
+  align-items: start;
 }
-.social-icons a:hover { background: var(--warm-peach); color: var(--ink); border-color: var(--warm-peach); text-decoration: none; }
-.social-icons svg { width: 20px; height: 20px; fill: currentColor; }
+.site-footer__logo img { width: 150px; height: auto; }
+.site-footer__tagline {
+  margin: var(--s-4) 0 var(--s-5);
+  font-size: var(--fs-small); color: var(--peach-dim); max-width: 24ch;
+}
+
+.site-footer h2 {
+  font-family: var(--font-label); font-size: var(--fs-label); font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.16em;
+  color: var(--golden-ember); margin-bottom: var(--s-3);
+}
+.site-footer ul { list-style: none; padding: 0; margin: 0; }
+.site-footer li + li { margin-top: var(--s-2); }
+.site-footer a:not(.btn) {
+  font-size: var(--fs-small); color: var(--warm-peach); text-decoration: none;
+}
+.site-footer a:not(.btn):hover { color: var(--golden-ember); text-decoration: underline; }
 
 .site-footer__base {
   margin-top: var(--s-7); padding-top: var(--s-5); border-top: 1px solid var(--ash-hi);
-  display: flex; flex-wrap: wrap; gap: var(--s-3) var(--s-5);
+  display: flex; flex-wrap: wrap; gap: var(--s-2) var(--s-5);
   justify-content: space-between; align-items: baseline;
   font-size: var(--fs-small); color: var(--peach-dim);
 }
 .site-footer__base p { margin: 0; }
+
+/* Tablet: the four columns become two, with the brand block across the top. */
+@media (max-width: 900px) {
+  .site-footer__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s-6) var(--s-5); }
+  .site-footer__grid > :first-child,
+  .site-footer__follow { grid-column: 1 / -1; }
+  .site-footer__tagline { max-width: 34ch; }
+  /* Seven platforms stacked is a ladder down an empty column. Run them inline. */
+  .site-footer__follow ul { display: flex; flex-wrap: wrap; gap: var(--s-2) var(--s-4); }
+  .site-footer__follow li + li { margin-top: 0; }
+}
+
+/* Phone: one column, and the social list runs inline so it doesn't become a
+   twelve-row ladder. */
+@media (max-width: 560px) {
+  .site-footer { padding-block: var(--s-7) var(--s-5); }
+  .site-footer__grid { grid-template-columns: 1fr; gap: var(--s-6); }
+  .site-footer__base { justify-content: flex-start; }
+}
 
 /* --- Utilities ------------------------------------------------------------- */
 .visually-hidden {
