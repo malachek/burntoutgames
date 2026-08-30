@@ -254,10 +254,33 @@ minute. You can do this from your phone.
 Everything the CMS edits is a plain JSON file in `content/`. Change it, run
 `node build.mjs` to check it locally, then commit and push.
 
-### Adding a downloadable press asset
+### Reviewing all the copy at once
 
-Put the file in `public/assets/press/`, then add it under Site settings → Press
-kit → Downloadable assets with the URL `/assets/press/your-file.pdf`.
+Run `node copy-review.mjs`. It writes `COPY-REVIEW.md` — every editable string
+on the site in one file, each with the exact field it maps to.
+
+> **Note:** brand assets are deliberately not offered for public download.
+> Press enquiries get files by email.
+
+### Fixing a photo by hand
+
+`tools/photo-tool.html` — open it in a browser (double-click it). Load a photo,
+drag to frame it, adjust exposure / contrast / saturation / warmth, download.
+It writes the full-size file AND the `@small` variant with the right names.
+Drop both into `public/assets/team/`, run `node build.mjs`, done.
+
+Two things it does that matter:
+
+- It honours the EXIF rotation tag, so the Riot group photo loads the right way
+  up instead of sideways.
+- It measures the three numbers the team cards are judged on — skin level,
+  contrast, saturation — for your crop AND for a reference photo loaded beside
+  it. Load a finished teammate card as the reference and match by eye or by
+  number. The rest of the team sits near skin 0.599 / contrast 0.598 /
+  saturation 0.386.
+
+Nothing in the build touches images. Whatever JPEG sits in `public/assets/` is
+exactly what ships, so replacing a file by hand always wins.
 
 ---
 

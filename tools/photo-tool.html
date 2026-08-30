@@ -1,0 +1,323 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>BOG photo tool</title>
+<style>
+  :root{
+    --ink:#1A0D07; --ash:#2B1710; --line:#3A2118;
+    --peach:#F9CA96; --dim:#D9A97C; --ember:#F59D24; --red:#B53417;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--ink);color:var(--peach);
+       font:14px/1.5 system-ui,-apple-system,Segoe UI,Helvetica,Arial,sans-serif}
+  header{padding:18px 22px;border-bottom:1px solid var(--line)}
+  h1{margin:0;font-size:17px;letter-spacing:.02em}
+  header p{margin:4px 0 0;color:var(--dim);font-size:13px}
+  main{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:22px;padding:22px;align-items:start}
+  @media (max-width:900px){main{grid-template-columns:1fr}}
+
+  .stage{background:var(--ash);border:1px solid var(--line);border-radius:12px;padding:16px}
+  .canvases{display:flex;gap:16px;flex-wrap:wrap;align-items:flex-start}
+  .shot{flex:0 0 auto}
+  .shot h2{margin:0 0 6px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ember)}
+  canvas{background:#000;border-radius:8px;display:block;max-width:100%;height:auto;
+         border:1px solid var(--line);cursor:grab}
+  canvas.dragging{cursor:grabbing}
+  .hint{margin-top:10px;color:var(--dim);font-size:12px}
+
+  .panel{background:var(--ash);border:1px solid var(--line);border-radius:12px;padding:16px;
+         position:sticky;top:22px}
+  .panel h2{margin:0 0 10px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ember)}
+  .panel section+section{margin-top:18px;padding-top:16px;border-top:1px solid var(--line)}
+  label{display:block;margin-bottom:12px;font-size:12px;color:var(--dim)}
+  label b{display:flex;justify-content:space-between;color:var(--peach);font-weight:600;margin-bottom:4px}
+  input[type=range]{width:100%;accent-color:var(--ember)}
+  select,input[type=file]{width:100%;background:var(--ink);color:var(--peach);
+    border:1px solid var(--line);border-radius:6px;padding:7px 8px;font:inherit;font-size:13px}
+  button{width:100%;padding:10px;border:0;border-radius:999px;font:inherit;font-weight:700;
+         background:var(--red);color:#fff;cursor:pointer;margin-top:6px}
+  button.ghost{background:transparent;color:var(--peach);border:1px solid var(--dim)}
+  button:disabled{opacity:.45;cursor:default}
+  .readout{margin-top:12px;font:12px/1.6 ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--dim);
+           white-space:pre-wrap;word-break:break-all}
+</style>
+</head>
+<body>
+<header>
+  <h1>Burnt Out Games — photo tool</h1>
+  <p>Crop and grade by eye, then export straight into <code>public/assets/team/</code>. Nothing is uploaded; it all runs in this page.</p>
+</header>
+
+<main>
+  <div class="stage">
+    <div class="canvases">
+      <div class="shot">
+        <h2>Your crop</h2>
+        <canvas id="out" width="560" height="700"></canvas>
+      </div>
+      <div class="shot" id="refWrap" hidden>
+        <h2>Reference</h2>
+        <canvas id="ref" width="560" height="700"></canvas>
+      </div>
+    </div>
+    <p class="hint">Drag inside the crop to move the picture. Scroll or use Zoom to resize.
+       Load a teammate's finished photo as a reference to match the grading by eye.</p>
+    <div class="readout" id="stats"></div>
+  </div>
+
+  <div class="panel">
+    <section>
+      <h2>Source</h2>
+      <label>Photo to work on
+        <input type="file" id="file" accept="image/*">
+      </label>
+      <label>Output size
+        <select id="preset">
+          <option value="560x700">Headshot — 560 × 700</option>
+          <option value="1280x853">Team group photo — 1280 × 853</option>
+          <option value="1200x630">Social card — 1200 × 630</option>
+        </select>
+      </label>
+      <label>Reference to match (optional)
+        <input type="file" id="reffile" accept="image/*">
+      </label>
+    </section>
+
+    <section>
+      <h2>Framing</h2>
+      <label><b>Zoom <span id="vZoom">1.00</span></b>
+        <input type="range" id="zoom" min="0.4" max="4" step="0.01" value="1"></label>
+      <button class="ghost" id="fit">Reset framing</button>
+    </section>
+
+    <section>
+      <h2>Grading</h2>
+      <label><b>Exposure <span id="vExp">0</span></b>
+        <input type="range" id="exp" min="-60" max="60" step="1" value="0"></label>
+      <label><b>Contrast <span id="vCon">0</span></b>
+        <input type="range" id="con" min="-50" max="80" step="1" value="0"></label>
+      <label><b>Saturation <span id="vSat">0</span></b>
+        <input type="range" id="sat" min="-60" max="80" step="1" value="0"></label>
+      <label><b>Warmth <span id="vWarm">0</span></b>
+        <input type="range" id="warm" min="-40" max="40" step="1" value="0"></label>
+      <label><b>Lift shadows <span id="vLift">0</span></b>
+        <input type="range" id="lift" min="-20" max="40" step="1" value="0"></label>
+      <button class="ghost" id="resetGrade">Reset grading</button>
+    </section>
+
+    <section>
+      <h2>Export</h2>
+      <label>File name
+        <input type="text" id="name" value="lyndsey-narvaez" style="width:100%;background:var(--ink);color:var(--peach);border:1px solid var(--line);border-radius:6px;padding:7px 8px;font:inherit">
+      </label>
+      <button id="save" disabled>Download</button>
+      <p class="hint">Headshots download as two files (full size + <code>@small</code>); the group
+         photo and social card download as one. Drop them into
+         <code>public/assets/team/</code>, replacing what's there, then run
+         <code>node build.mjs</code>.</p>
+    </section>
+  </div>
+</main>
+
+<script>
+const $ = (id) => document.getElementById(id);
+const out = $('out'), ctx = out.getContext('2d', { willReadFrequently: true });
+const refC = $('ref'), refCtx = refC.getContext('2d', { willReadFrequently: true });
+
+let img = null, refImg = null;
+let view = { x: 0, y: 0, scale: 1 };      // top-left of the source in canvas space
+
+const grade = () => ({
+  exp: +$('exp').value, con: +$('con').value, sat: +$('sat').value,
+  warm: +$('warm').value, lift: +$('lift').value,
+});
+
+/* --- loading ------------------------------------------------------------ */
+// createImageBitmap honours the EXIF rotation tag. Reading the file straight
+// into a canvas does not, which is how the team photo ended up sideways.
+async function load(file) {
+  return await createImageBitmap(file, { imageOrientation: 'from-image' });
+}
+
+$('file').onchange = async (e) => {
+  if (!e.target.files[0]) return;
+  img = await load(e.target.files[0]);
+  const base = e.target.files[0].name.replace(/\.[^.]+$/, '').toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+  if (base) $('name').value = base;
+  fit(); $('save').disabled = false;
+};
+
+$('reffile').onchange = async (e) => {
+  if (!e.target.files[0]) return;
+  refImg = await load(e.target.files[0]);
+  $('refWrap').hidden = false;
+  drawRef();
+};
+
+$('preset').onchange = () => {
+  const [w, h] = $('preset').value.split('x').map(Number);
+  out.width = w; out.height = h; refC.width = w; refC.height = h;
+  if (img) fit();
+  if (refImg) drawRef();
+};
+
+/* --- framing ------------------------------------------------------------ */
+function fit() {
+  if (!img) return;
+  const s = Math.max(out.width / img.width, out.height / img.height);
+  view.scale = s;
+  view.x = (out.width - img.width * s) / 2;
+  view.y = (out.height - img.height * s) / 2;
+  $('zoom').value = '1';
+  draw();
+}
+$('fit').onclick = fit;
+
+$('zoom').oninput = () => {
+  if (!img) return;
+  const base = Math.max(out.width / img.width, out.height / img.height);
+  const next = base * (+$('zoom').value);
+  // zoom about the centre of the frame so the subject stays put
+  const cx = out.width / 2, cy = out.height / 2;
+  view.x = cx - (cx - view.x) * (next / view.scale);
+  view.y = cy - (cy - view.y) * (next / view.scale);
+  view.scale = next;
+  draw();
+};
+
+let drag = null;
+out.addEventListener('pointerdown', (e) => {
+  if (!img) return;
+  drag = { x: e.offsetX, y: e.offsetY, vx: view.x, vy: view.y };
+  out.setPointerCapture(e.pointerId); out.classList.add('dragging');
+});
+out.addEventListener('pointermove', (e) => {
+  if (!drag) return;
+  const k = out.width / out.getBoundingClientRect().width;   // canvas may be scaled by CSS
+  view.x = drag.vx + (e.offsetX - drag.x) * k;
+  view.y = drag.vy + (e.offsetY - drag.y) * k;
+  draw();
+});
+const endDrag = () => { drag = null; out.classList.remove('dragging'); };
+out.addEventListener('pointerup', endDrag);
+out.addEventListener('pointercancel', endDrag);
+out.addEventListener('wheel', (e) => {
+  if (!img) return;
+  e.preventDefault();
+  $('zoom').value = Math.min(4, Math.max(0.4, +$('zoom').value * (e.deltaY < 0 ? 1.06 : 0.94)));
+  $('zoom').oninput();
+}, { passive: false });
+
+/* --- grading ------------------------------------------------------------ */
+function apply(c, w, h) {
+  const g = grade();
+  const d = c.getImageData(0, 0, w, h), p = d.data;
+  const exp = Math.pow(2, g.exp / 60);            // stops, roughly
+  const con = 1 + g.con / 100;
+  const sat = 1 + g.sat / 100;
+  const warm = g.warm / 400;
+  const lift = g.lift / 255;
+  for (let i = 0; i < p.length; i += 4) {
+    let r = p[i] / 255, gr = p[i + 1] / 255, b = p[i + 2] / 255;
+    r *= exp; gr *= exp; b *= exp;                              // exposure
+    r += lift * (1 - r); gr += lift * (1 - gr); b += lift * (1 - b);   // shadow lift
+    r = (r - 0.5) * con + 0.5; gr = (gr - 0.5) * con + 0.5; b = (b - 0.5) * con + 0.5;
+    const y = 0.2126 * r + 0.7152 * gr + 0.0722 * b;            // saturation
+    r = y + (r - y) * sat; gr = y + (gr - y) * sat; b = y + (b - y) * sat;
+    r += warm; b -= warm;                                        // warmth
+    p[i] = Math.max(0, Math.min(255, r * 255));
+    p[i + 1] = Math.max(0, Math.min(255, gr * 255));
+    p[i + 2] = Math.max(0, Math.min(255, b * 255));
+  }
+  c.putImageData(d, 0, 0);
+}
+
+function draw() {
+  if (!img) return;
+  ctx.fillStyle = '#000'; ctx.fillRect(0, 0, out.width, out.height);
+  ctx.imageSmoothingQuality = 'high';
+  ctx.drawImage(img, view.x, view.y, img.width * view.scale, img.height * view.scale);
+  apply(ctx, out.width, out.height);
+  for (const k of ['zoom', 'exp', 'con', 'sat', 'warm', 'lift']) {
+    const el = $('v' + k[0].toUpperCase() + k.slice(1));
+    if (el) el.textContent = k === 'zoom' ? (+$('zoom').value).toFixed(2) : $(k).value;
+  }
+  report();
+}
+
+function drawRef() {
+  if (!refImg) return;
+  const s = Math.max(refC.width / refImg.width, refC.height / refImg.height);
+  refCtx.fillStyle = '#000'; refCtx.fillRect(0, 0, refC.width, refC.height);
+  refCtx.drawImage(refImg, (refC.width - refImg.width * s) / 2, (refC.height - refImg.height * s) / 2,
+    refImg.width * s, refImg.height * s);
+  report();
+}
+
+/* Same three numbers the site is judged on, measured over the zone a face
+   lands in. Match these to the reference and the card will sit with the rest. */
+function measure(c, w, h) {
+  const zx = Math.round(w * 0.30), zy = Math.round(h * 0.26);
+  const zw = Math.round(w * 0.40), zh = Math.round(h * 0.26);
+  if (zw < 2 || zh < 2) return null;
+  const p = c.getImageData(zx, zy, zw, zh).data;
+  const lum = [], sats = [];
+  for (let i = 0; i < p.length; i += 4) {
+    const r = p[i] / 255, g = p[i + 1] / 255, b = p[i + 2] / 255;
+    lum.push(0.2126 * r + 0.7152 * g + 0.0722 * b);
+    const mx = Math.max(r, g, b), mn = Math.min(r, g, b);
+    sats.push(mx > 0 ? (mx - mn) / mx : 0);
+  }
+  lum.sort((a, b) => a - b);
+  const q = (t) => lum[Math.floor((lum.length - 1) * t)];
+  return {
+    skin: q(0.70).toFixed(3),
+    contrast: (q(0.90) - q(0.10)).toFixed(3),
+    sat: (sats.reduce((a, b) => a + b, 0) / sats.length).toFixed(3),
+  };
+}
+
+function report() {
+  const a = measure(ctx, out.width, out.height);
+  let s = a ? `yours      skin ${a.skin}   contrast ${a.contrast}   saturation ${a.sat}` : '';
+  if (refImg) {
+    const b = measure(refCtx, refC.width, refC.height);
+    if (b) s += `\nreference  skin ${b.skin}   contrast ${b.contrast}   saturation ${b.sat}`;
+  }
+  s += `\nthe rest of the team sits near   skin 0.599   contrast 0.598   saturation 0.386`;
+  $('stats').textContent = s;
+}
+
+for (const k of ['exp', 'con', 'sat', 'warm', 'lift']) $(k).oninput = draw;
+$('resetGrade').onclick = () => {
+  for (const k of ['exp', 'con', 'sat', 'warm', 'lift']) $(k).value = 0;
+  draw();
+};
+
+/* --- export ------------------------------------------------------------- */
+$('save').onclick = () => {
+  const name = ($('name').value || 'photo').replace(/[^a-z0-9-]/gi, '-');
+  const grab = (cv, suffix) => cv.toBlob((b) => {
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(b);
+    a.download = `${name}${suffix}.jpg`;
+    a.click();
+    setTimeout(() => URL.revokeObjectURL(a.href), 4000);
+  }, 'image/jpeg', 0.88);
+
+  grab(out, '');
+  // Only the headshots have an @small variant on the site; the group photo and
+  // the social card do not, so don't hand you a file with nowhere to go.
+  if ($('preset').value !== '560x700') return;
+  const half = document.createElement('canvas');
+  half.width = Math.round(out.width / 2); half.height = Math.round(out.height / 2);
+  const hc = half.getContext('2d');
+  hc.imageSmoothingQuality = 'high';
+  hc.drawImage(out, 0, 0, half.width, half.height);
+  setTimeout(() => grab(half, '@small'), 400);
+};
+</script>
+</body>
+</html>
