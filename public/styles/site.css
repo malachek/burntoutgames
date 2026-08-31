@@ -279,10 +279,10 @@ a:hover { color: var(--firewood); }
 /* The mark is deliberately huge and runs off the bottom-right corner. It sits
    at z-index -1, so the headline and the buttons pass straight over it. */
 .hero__mark {
-  position: absolute; right: -6%; bottom: -34%; z-index: -1;
-  width: min(37vw, 450px); opacity: 0.11; pointer-events: none;
+  position: absolute; right: 2.5%; bottom: 0; z-index: -1;
+  width: min(30vw, 380px); opacity: 0.13; pointer-events: none;
 }
-@media (max-width: 860px) { .hero__mark { right: -12%; bottom: -12%; width: 59vw; opacity: 0.12; } }
+@media (max-width: 860px) { .hero__mark { right: -6%; bottom: 0; width: 52vw; opacity: 0.12; } }
 .hero__inner { position: relative; z-index: 1; width: 100%; }
 .hero__title {
   font-family: var(--font-display); font-size: var(--fs-display);
@@ -291,7 +291,7 @@ a:hover { color: var(--firewood); }
   margin-bottom: var(--s-5);
 }
 .hero__title .flare { color: var(--fiery-red); display: block; }
-.hero__sub { font-size: var(--fs-lead); max-width: 40ch; color: var(--warm-peach); }
+.hero__sub { font-size: var(--fs-lead); max-width: min(var(--measure-fixed), 100%); color: var(--warm-peach); }
 .hero__actions { margin-top: var(--s-7); }
 
 @media (prefers-reduced-motion: reduce) { .hero__strip { animation: none; } }
@@ -307,9 +307,11 @@ a:hover { color: var(--firewood); }
   position: absolute; inset: 0; z-index: -1;
   background: linear-gradient(95deg, var(--g-bg) 0%, var(--g-bg) 40%, transparent 105%);
 }
-.showcase__inner { position: relative; display: grid; gap: var(--s-7); align-items: center; }
-@media (min-width: 900px) { .showcase__inner { grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.6fr); gap: var(--s-6); } }
-.showcase__copy { max-width: 44ch; }
+/* One column, with the flame floated into the corner rather than taking a grid
+   track. A side column squeezed the copy to 714px and forced the block taller
+   than it needed to be. */
+.showcase__inner { position: relative; display: block; }
+.showcase__copy { max-width: min(var(--measure-fixed), 100%); }
 .showcase__title { margin: 0 0 var(--s-4); }
 .showcase__logo { width: auto; height: auto; max-width: min(300px, 60vw); max-height: clamp(78px, 12vw, 140px); object-fit: contain; object-position: left center; }
 .showcase__logo--text { font-family: var(--font-display); font-size: var(--fs-h1); color: var(--g-text); }
@@ -326,11 +328,12 @@ a:hover { color: var(--firewood); }
   filter: drop-shadow(0 3px 10px rgba(0,0,0,0.55));
 }
 .showcase__mark {
+  position: absolute; right: 0; top: 0;
   width: clamp(56px, 6vw, 84px); height: clamp(56px, 6vw, 84px);
   object-fit: contain; object-position: center;
-  justify-self: end; align-self: start;
   filter: drop-shadow(0 8px 22px rgba(0,0,0,0.5));
 }
+@media (max-width: 640px) { .showcase__mark { width: 48px; height: 48px; } }
 @media (max-width: 899px) { .showcase__mark { display: none; } }
 
 /* --- Game capsule ---------------------------------------------------------- */

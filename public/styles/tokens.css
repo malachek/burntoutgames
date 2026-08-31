@@ -80,6 +80,10 @@
   --lh-body:    1.65;
 
   --measure: 66ch;
+  /* A ch-based measure changes width with the element's font size, which is why
+     the hero paragraph and the EXO paragraph came out 840px and 714px while
+     both said "66ch". Where two blocks must match, use this instead. */
+  --measure-fixed: 840px;
 
   /* --- Space (8px base) --------------------------------------------------- */
   --s-1: 0.25rem;  --s-2: 0.5rem;   --s-3: 0.75rem;  --s-4: 1rem;
