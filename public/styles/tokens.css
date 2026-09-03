@@ -43,6 +43,7 @@
   --peach-dim:     #D9A97C;  /* muted text on ink: 8.6:1                     */
   --firewood-dim:  #7A4A33;  /* muted text on Warm Peach: 4.87:1             */
   --peach-line:    #C99264;  /* borders on a Warm Peach surface              */
+  --link-bright:   #FFA640;  /* body links on dark. on ink: 9.42:1            */
 
   /* --- Surfaces ----------------------------------------------------------
      The page alternates between three real brand colours. There is no

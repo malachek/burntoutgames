@@ -89,7 +89,7 @@ p + p { margin-top: var(--s-4); }
 
 a { color: var(--red-900); text-decoration-thickness: 1px; text-underline-offset: 3px; }
 a:hover { color: var(--firewood); }
-.on-ink a:not(.btn), .on-firewood a:not(.btn) { color: var(--golden-ember); }
+.on-ink a:not(.btn), .on-firewood a:not(.btn) { color: var(--link-bright); }
 .on-ink a:not(.btn):hover, .on-firewood a:not(.btn):hover { color: var(--light-glow); }
 
 /* --- Surfaces ------------------------------------------------------------- */
@@ -254,14 +254,15 @@ a:hover { color: var(--firewood); }
   position: absolute; inset: 0; z-index: -3;
   background-image: url('/assets/hero-strip.jpg');
   background-repeat: repeat-x;
-  background-size: auto 100%;
+  /* Width-driven: the three panels always span exactly one screen and crop
+     vertically, so the framing is the same on any monitor. Height-driven
+     sizing meant a wide window showed more panels than a narrow one. */
+  background-size: 100vw auto;
   animation: hero-scroll var(--hero-scroll) linear infinite;
 }
-/* One cycle is 2280x1100, so a 700px-tall hero renders it 1451px wide: all
-   three games are on screen at once, and the loop is exactly one cycle. */
 @keyframes hero-scroll {
   from { background-position: 0 center; }
-  to   { background-position: calc(-2280 / 1100 * 100vh) center; }
+  to   { background-position: -100vw center; }
 }
 
 /* Neutral darkening only. The previous orange tint over EXO's violet art is
@@ -636,6 +637,109 @@ a:hover { color: var(--firewood); }
   .site-footer__grid { grid-template-columns: 1fr; gap: var(--s-6); }
   .site-footer__base { justify-content: flex-start; }
 }
+
+/* --- Nav menus --------------------------------------------------------------
+   Hover, and focus-within so it opens on keyboard too. The parent link still
+   navigates on click; the menu is a shortcut, never the only way in.
+   -------------------------------------------------------------------------- */
+.nav__item { position: relative; display: flex; align-items: center; }
+.nav__menu {
+  position: absolute; top: 100%; left: 50%; transform: translate(-50%, 6px);
+  min-width: 12rem; padding: var(--s-2);
+  background: var(--ash); border: 1px solid var(--ash-hi);
+  border-radius: var(--r-md); box-shadow: var(--shadow-card);
+  display: grid; gap: 2px; z-index: var(--z-menu);
+  opacity: 0; visibility: hidden;
+  transition: opacity var(--dur) var(--ease), transform var(--dur) var(--ease), visibility var(--dur);
+}
+.nav__item--has-menu:hover .nav__menu,
+.nav__item--has-menu:focus-within .nav__menu {
+  opacity: 1; visibility: visible; transform: translate(-50%, 0);
+}
+.site-header .nav__menu a:not(.btn) {
+  display: block; padding: 0.5rem 0.7rem; border-radius: var(--r-sm);
+  font-family: var(--font-body); font-size: var(--fs-small);
+  font-weight: 500; letter-spacing: 0; text-transform: none;
+  color: var(--warm-peach); white-space: nowrap;
+}
+.site-header .nav__menu a:not(.btn):hover,
+.site-header .nav__menu a:not(.btn):focus-visible {
+  background: var(--red-800); color: #fff;
+}
+@media (max-width: 860px) {
+  .nav__item { display: block; }
+  .nav__menu {
+    position: static; transform: none; opacity: 1; visibility: visible;
+    background: none; border: 0; box-shadow: none; padding: 0 0 0 var(--s-4);
+    min-width: 0;
+  }
+}
+
+/* --- Studio block: copy beside a smaller team photo ------------------------- */
+.studio-split { display: grid; gap: var(--s-7); align-items: start; }
+@media (min-width: 900px) { .studio-split { grid-template-columns: minmax(0, 1fr) minmax(0, 0.85fr); gap: var(--s-8); } }
+.studio-photo { margin: 0; }
+.studio-photo img { width: 100%; border-radius: var(--r-md); display: block; }
+.studio-photo figcaption {
+  margin-top: var(--s-3);
+  font-family: var(--font-label); font-size: var(--fs-small); font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.1em; color: var(--peach-dim);
+}
+
+/* --- What we've shipped, as cards rather than a table ---------------------- */
+.shipped { list-style: none; padding: 0; display: grid; gap: var(--s-4); grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr)); }
+.shipped__link {
+  display: flex; flex-direction: column; height: 100%; overflow: hidden;
+  border-radius: var(--r-md);
+  background: var(--g-bg, var(--ink)); color: var(--g-text, var(--warm-peach));
+  border: 2px solid var(--g-accent, var(--red-deep));
+  text-decoration: none; box-shadow: var(--shadow-card);
+  transition: transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+}
+.shipped__link:hover { transform: translateY(-3px); box-shadow: var(--shadow-card-hover); text-decoration: none; }
+.shipped__art { position: relative; display: block; aspect-ratio: 16 / 9; background: var(--g-surface, var(--ash)); }
+.shipped__art > img:not(.shipped__mark) { width: 100%; height: 100%; object-fit: cover; object-position: var(--g-focus, center); display: block; }
+.shipped__text { display: grid; gap: var(--s-2); padding: var(--s-5); }
+.shipped__mark {
+  position: absolute; right: var(--s-3); top: var(--s-3);
+  width: 34px; height: 34px; object-fit: contain;
+  filter: drop-shadow(0 3px 10px rgba(0,0,0,0.55));
+}
+.shipped__title { font-family: var(--font-display); font-size: var(--fs-h3); text-transform: uppercase; line-height: 1.1; }
+.shipped__genre { font-size: var(--fs-small); color: var(--g-muted, var(--peach-dim)); }
+.shipped__status {
+  margin-top: var(--s-2); font-family: var(--font-label); font-size: var(--fs-label);
+  font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em;
+  color: var(--g-accent, var(--golden-ember));
+}
+
+/* A game capsule carries its own palette wherever it sits. The surface link
+   colour (.on-ink a) out-specified it once the games index moved to a dark
+   background, so EXO's card rendered in site orange instead of EXO violet. */
+.on-ink .gcard a:not(.btn),
+.on-firewood .gcard a:not(.btn),
+.on-peach .gcard a:not(.btn) { color: var(--g-accent); }
+.on-ink .gcard__title a:not(.btn),
+.on-firewood .gcard__title a:not(.btn),
+.on-peach .gcard__title a:not(.btn) { color: var(--g-text); }
+.on-ink .gcard__title a:not(.btn):hover,
+.on-firewood .gcard__title a:not(.btn):hover,
+.on-peach .gcard__title a:not(.btn):hover { color: var(--g-accent); }
+.gcard .badge--dev { background: var(--g-accent); color: var(--g-bg); }
+.gcard .badge--out { background: var(--g-text); color: var(--g-bg); }
+
+/* --- Games index: full-width rows, matching the home page ------------------ */
+.game-rows { display: grid; gap: var(--s-6); }
+
+/* --- Devlog cards: framed, and clickable across the whole card ------------- */
+.post-card { position: relative; border: 1px solid var(--ash-hi); }
+.post-card__link::after { content: ''; position: absolute; inset: 0; border-radius: inherit; }
+.post-card:hover { border-color: var(--golden-ember); }
+.post-card__cue {
+  font-family: var(--font-label); font-size: var(--fs-label); font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.1em; color: var(--golden-ember);
+}
+.post-card:hover .post-card__cue { text-decoration: underline; }
 
 /* --- Utilities ------------------------------------------------------------- */
 .visually-hidden {
