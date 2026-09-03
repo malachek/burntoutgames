@@ -246,8 +246,11 @@ a:hover { color: var(--firewood); }
 .hero {
   position: relative; overflow: hidden; isolation: isolate;
   background: var(--ink); color: var(--warm-peach);
-  padding-block: clamp(4rem, 11vw, 8.5rem) clamp(2.25rem, 5vw, 4rem);
-  min-height: min(66vh, 620px);
+  padding-block: clamp(3.5rem, 8vw, 6rem) clamp(3rem, 6vw, 5rem);
+  /* The strip is 2280x1100 and scales to the page width, so at 100vw wide it
+     stands 48.24vw tall. Matching the hero to that means the art always fills
+     the section — a fixed height left a dead band under the collage. */
+  min-height: min(48.24vw, 720px);
   display: flex; align-items: center;
 }
 .hero__strip {
@@ -294,6 +297,15 @@ a:hover { color: var(--firewood); }
 .hero__title .flare { color: var(--fiery-red); display: block; }
 .hero__sub { font-size: var(--fs-lead); max-width: min(var(--measure-fixed), 100%); color: var(--warm-peach); }
 .hero__actions { margin-top: var(--s-7); }
+
+@media (max-width: 1000px) {
+  .hero { min-height: min(70vh, 560px); }
+  .hero__strip { background-size: auto 100%; }
+  @keyframes hero-scroll {
+    from { background-position: 0 center; }
+    to   { background-position: calc(-2280 / 1100 * 100vh) center; }
+  }
+}
 
 @media (prefers-reduced-motion: reduce) { .hero__strip { animation: none; } }
 
@@ -652,9 +664,11 @@ a:hover { color: var(--firewood); }
   opacity: 0; visibility: hidden;
   transition: opacity var(--dur) var(--ease), transform var(--dur) var(--ease), visibility var(--dur);
 }
-.nav__item--has-menu:hover .nav__menu,
-.nav__item--has-menu:focus-within .nav__menu {
-  opacity: 1; visibility: visible; transform: translate(-50%, 0);
+@media (min-width: 861px) {
+  .nav__item--has-menu:hover .nav__menu,
+  .nav__item--has-menu:focus-within .nav__menu {
+    opacity: 1; visibility: visible; transform: translate(-50%, 0);
+  }
 }
 .site-header .nav__menu a:not(.btn) {
   display: block; padding: 0.5rem 0.7rem; border-radius: var(--r-sm);
@@ -668,7 +682,9 @@ a:hover { color: var(--firewood); }
 }
 @media (max-width: 860px) {
   .nav__item { display: block; }
-  .nav__menu {
+  .nav__menu,
+  .nav__item--has-menu:hover .nav__menu,
+  .nav__item--has-menu:focus-within .nav__menu {
     position: static; transform: none; opacity: 1; visibility: visible;
     background: none; border: 0; box-shadow: none; padding: 0 0 0 var(--s-4);
     min-width: 0;
@@ -728,16 +744,32 @@ a:hover { color: var(--firewood); }
 .gcard .badge--dev { background: var(--g-accent); color: var(--g-bg); }
 .gcard .badge--out { background: var(--g-text); color: var(--g-bg); }
 
+/* Games index: a short header so the second capsule peeks above the fold. */
+.section--flush-top { padding-block: var(--s-5) var(--section-pad); }
+.games-title { margin: var(--s-1) 0 var(--s-5); }
+/* A slightly shorter art box on the index so the next game's capsule breaks
+   the fold and it's obvious there is more below. */
+.game-rows .gcard__art { aspect-ratio: 16 / 6; }
+
 /* --- Games index: full-width rows, matching the home page ------------------ */
 .game-rows { display: grid; gap: var(--s-6); }
 
 /* --- Devlog cards: framed, and clickable across the whole card ------------- */
-.post-card { position: relative; border: 1px solid var(--ash-hi); }
+.post-card {
+  position: relative;
+  background: var(--light-glow); color: var(--firewood);
+  border: 1px solid var(--peach-line);
+}
+.post-card .eyebrow { color: var(--red-900); }
+.post-card .card__title a { color: var(--firewood); }
+.on-peach .post-card .card__title a:not(.btn),
+.post-card .card__title a:not(.btn) { color: var(--firewood); }
+.post-card:hover .card__title a { color: var(--red-deep); }
 .post-card__link::after { content: ''; position: absolute; inset: 0; border-radius: inherit; }
-.post-card:hover { border-color: var(--golden-ember); }
+.post-card:hover { border-color: var(--red-deep); }
 .post-card__cue {
   font-family: var(--font-label); font-size: var(--fs-label); font-weight: 700;
-  text-transform: uppercase; letter-spacing: 0.1em; color: var(--golden-ember);
+  text-transform: uppercase; letter-spacing: 0.1em; color: var(--red-900);
 }
 .post-card:hover .post-card__cue { text-decoration: underline; }
 
